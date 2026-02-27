@@ -1,0 +1,147 @@
+name: Qlik Sense APIs
+description: APIs for Qlik Sense, a business intelligence and data analytics platform
+image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+created: '2024-01-15'
+modified: '2024-01-15'
+specificationVersion: '0.16'
+url: https://qlik.dev/apis.json
+apis:
+- name: Qlik Sense Engine API
+  description: WebSocket-based API for interacting with the Qlik Associative Engine, including data modeling, selections, and visualizations
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+  humanURL: https://qlik.dev/apis/json-rpc/qix
+  baseURL: wss://your-tenant.us.qlikcloud.com/app/{appId}
+  tags:
+  - Analytics
+  - Business Intelligence
+  - Data Engine
+  - WebSocket
+  properties:
+  - type: Documentation
+    url: https://qlik.dev/apis/json-rpc/qix
+  - type: OpenAPI
+    url: https://qlik.dev/apis/json-rpc/qix/schema
+  contact:
+  - FN: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+- name: Qlik Sense Repository API
+  description: REST API for managing Qlik Sense repository objects including apps, streams, users, and security rules
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+  humanURL: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  baseURL: https://your-server/qrs
+  tags:
+  - Repository
+  - Administration
+  - Security
+  - REST
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/index.html
+  - type: OpenAPI
+    url: https://help.qlik.com/en-US/sense-developer/APIs/RepositoryServiceAPI/swagger.json
+  contact:
+  - FN: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+- name: Qlik Cloud Platform REST API
+  description: REST API for Qlik Cloud services including apps, data connections, spaces, and tenant management
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+  humanURL: https://qlik.dev/apis/rest
+  baseURL: https://your-tenant.us.qlikcloud.com/api/v1
+  tags:
+  - Cloud
+  - Platform
+  - Management
+  - REST
+  properties:
+  - type: Documentation
+    url: https://qlik.dev/apis/rest
+  - type: OpenAPI
+    url: https://qlik.dev/apis/rest/openapi
+  - type: Authentication
+    url: https://qlik.dev/authenticate
+  contact:
+  - FN: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+- name: Qlik Sense Proxy API
+  description: REST API for session management and authentication through the Qlik Sense Proxy Service
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+  humanURL: https://help.qlik.com/en-US/sense-developer/APIs/ProxyAPI/index.html
+  baseURL: https://your-server/qps
+  tags:
+  - Proxy
+  - Authentication
+  - Sessions
+  - REST
+  properties:
+  - type: Documentation
+    url: https://help.qlik.com/en-US/sense-developer/APIs/ProxyAPI/index.html
+  contact:
+  - FN: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+- name: Qlik Data Integration API
+  description: REST API for managing data integration tasks, connections, and data pipelines
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+  humanURL: https://qlik.dev/apis/rest/data-integration
+  baseURL: https://your-tenant.us.qlikcloud.com/api/v1/data-integration
+  tags:
+  - Data Integration
+  - ETL
+  - Data Pipeline
+  - REST
+  properties:
+  - type: Documentation
+    url: https://qlik.dev/apis/rest/data-integration
+  - type: OpenAPI
+    url: https://qlik.dev/apis/rest/data-integration/openapi
+  contact:
+  - FN: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+- name: Qlik Embedding API
+  description: JavaScript API for embedding Qlik Sense visualizations and mashups into web applications
+  image: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+  humanURL: https://qlik.dev/embed
+  baseURL: https://your-tenant.us.qlikcloud.com/resources
+  tags:
+  - Embedding
+  - JavaScript
+  - Visualization
+  - Mashups
+  properties:
+  - type: Documentation
+    url: https://qlik.dev/embed
+  - type: Tutorials
+    url: https://qlik.dev/tutorials/embed-analytics
+  - type: Code Samples
+    url: https://github.com/qlik-oss/nebula.js
+  contact:
+  - FN: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+common:
+- type: Portal
+  url: https://qlik.dev
+- type: Documentation
+  url: https://help.qlik.com/en-US/sense-developer/
+- type: Authentication
+  url: https://qlik.dev/authenticate
+- type: Getting Started
+  url: https://qlik.dev/get-started
+- type: Terms of Service
+  url: https://www.qlik.com/us/legal/terms-of-use
+- type: Privacy Policy
+  url: https://www.qlik.com/us/legal/privacy
+- type: GitHub
+  url: https://github.com/qlik-oss
+- type: Support
+  url: https://community.qlik.com
+- type: Status
+  url: https://status.qlik.com
+maintainers:
+- FN: Qlik Developer Relations
+  email: developer@qlik.com
+  url: https://qlik.dev

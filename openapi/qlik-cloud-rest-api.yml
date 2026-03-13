@@ -1,0 +1,1878 @@
+openapi: 3.1.0
+info:
+  title: Qlik Cloud REST API
+  description: >-
+    REST API for Qlik Cloud platform services including apps, spaces, and
+    reloads. Provides programmatic access to manage analytics applications,
+    organize resources into spaces with access control, and trigger data
+    reloads. Authentication is performed via OAuth 2.0 bearer tokens or API
+    keys issued from a Qlik Cloud tenant.
+  version: 1.0.0
+  contact:
+    name: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+  license:
+    name: Qlik Terms of Use
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-logo:
+    url: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+
+externalDocs:
+  description: Qlik Cloud REST API documentation
+  url: https://qlik.dev/apis/rest
+
+servers:
+  - url: https://{tenant}.{region}.qlikcloud.com/api/v1
+    description: Qlik Cloud tenant
+    variables:
+      tenant:
+        default: your-tenant
+        description: The name of your Qlik Cloud tenant
+      region:
+        default: us
+        description: The region of your Qlik Cloud deployment
+        enum:
+          - us
+          - eu
+          - ap
+          - uk
+
+security:
+  - bearerAuth: []
+  - apiKey: []
+
+tags:
+  - name: Apps
+    description: >-
+      Manage Qlik Sense analytics applications including creating, copying,
+      importing, exporting, publishing, and retrieving app metadata.
+    externalDocs:
+      url: https://qlik.dev/apis/rest/apps
+  - name: Spaces
+    description: >-
+      Manage spaces, which are logical containers within a tenant that control
+      access for users and groups through role-based assignments.
+    externalDocs:
+      url: https://qlik.dev/apis/rest/spaces
+  - name: Reloads
+    description: >-
+      Trigger and manage data reloads for apps to refresh data from connected
+      sources.
+    externalDocs:
+      url: https://qlik.dev/apis/rest/reloads
+
+paths:
+  # ── Apps ────────────────────────────────────────────────────────────────────
+  /apps:
+    get:
+      operationId: getAppsPrivileges
+      summary: Get app privileges
+      description: >-
+        Retrieves the current user privileges for app operations such as
+        create, read, update, delete, import, and export.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: Privileges returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createApp
+      summary: Create an app
+      description: Creates a new analytics app in the specified or personal space.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppCreate'
+      responses:
+        '200':
+          description: App created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /apps/{appId}:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    get:
+      operationId: getApp
+      summary: Retrieve an app
+      description: Retrieves information for a specific app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: App information returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateApp
+      summary: Update an app
+      description: Updates the information for a specific app.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppUpdate'
+      responses:
+        '200':
+          description: App updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteApp
+      summary: Delete an app
+      description: Deletes a specific app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: App deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/copy:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    post:
+      operationId: copyApp
+      summary: Copy an app
+      description: Copies a specific app within the tenant.
+      tags:
+        - Apps
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppCopy'
+      responses:
+        '200':
+          description: App copied successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/export:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    post:
+      operationId: exportApp
+      summary: Export an app
+      description: >-
+        Exports a specific app, returning a temporary download path for the
+        QVF file.
+      tags:
+        - Apps
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                noData:
+                  type: boolean
+                  description: >-
+                    When true, the export excludes the app data reducing the
+                    exported file size.
+                  default: false
+      responses:
+        '200':
+          description: Export initiated successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  downloadPath:
+                    type: string
+                    description: Temporary URL to download the exported QVF file.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/import:
+    post:
+      operationId: importApp
+      summary: Import an app
+      description: Imports an app from a QVF file into the system.
+      tags:
+        - Apps
+      parameters:
+        - name: name
+          in: query
+          description: The name of the target app.
+          schema:
+            type: string
+        - name: spaceId
+          in: query
+          description: >-
+            The space identifier to import the app into. Uses personal space
+            if omitted.
+          schema:
+            type: string
+        - name: mode
+          in: query
+          description: The import mode for the app.
+          schema:
+            type: string
+            enum:
+              - new
+              - autoreplace
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: App imported successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /apps/{appId}/publish:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    post:
+      operationId: publishApp
+      summary: Publish an app
+      description: Publishes an app from a personal or shared space to a managed space.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppPublish'
+      responses:
+        '200':
+          description: App published successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: republishApp
+      summary: Republish an app
+      description: >-
+        Republishes a published app, replacing its content with the source
+        app data.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppPublish'
+      responses:
+        '200':
+          description: App republished successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/owner:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    put:
+      operationId: updateAppOwner
+      summary: Change app owner
+      description: Changes the owner of the app.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ownerId
+              properties:
+                ownerId:
+                  type: string
+                  description: The identifier of the new owner.
+      responses:
+        '200':
+          description: Owner changed successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/space:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    put:
+      operationId: moveAppToSpace
+      summary: Move app to a space
+      description: Sets the space on a specific app.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - spaceId
+              properties:
+                spaceId:
+                  type: string
+                  description: The identifier of the target space.
+      responses:
+        '200':
+          description: App moved to space successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: removeAppFromSpace
+      summary: Remove app from space
+      description: Removes the space assignment from the app, moving it to personal space.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: App removed from space successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppAttributes'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/data/metadata:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    get:
+      operationId: getAppDataMetadata
+      summary: Retrieve data metadata for an app
+      description: >-
+        Retrieves data model and reload statistics metadata for an app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: Data metadata returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDataMetadata'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/data/lineage:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    get:
+      operationId: getAppDataLineage
+      summary: Retrieve data lineage for an app
+      description: Retrieves the data lineage information for an app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: Data lineage returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppDataLineage'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/scripts:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    get:
+      operationId: getAppScripts
+      summary: Retrieve script history
+      description: Retrieves the script version history for an app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: Script history returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AppScript'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: setAppScript
+      summary: Set script for an app
+      description: Sets the load script content for an app.
+      tags:
+        - Apps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - script
+              properties:
+                script:
+                  type: string
+                  description: The load script content.
+      responses:
+        '200':
+          description: Script set successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppScript'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/reloads/logs:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+    get:
+      operationId: getAppReloadLogs
+      summary: Retrieve script log metadata
+      description: Retrieves metadata about available reload script logs for an app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: Reload log metadata returned successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ReloadLog'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /apps/{appId}/reloads/logs/{reloadId}:
+    parameters:
+      - $ref: '#/components/parameters/AppId'
+      - $ref: '#/components/parameters/ReloadId'
+    get:
+      operationId: getAppReloadLog
+      summary: Retrieve a specific reload log
+      description: Retrieves the log content for a specific reload of an app.
+      tags:
+        - Apps
+      responses:
+        '200':
+          description: Reload log returned successfully.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  # ── Spaces ──────────────────────────────────────────────────────────────────
+  /spaces:
+    get:
+      operationId: listSpaces
+      summary: List spaces
+      description: >-
+        Retrieves spaces that the current user has access to. Supports
+        filtering by type, name, and owner.
+      tags:
+        - Spaces
+      parameters:
+        - name: action
+          in: query
+          description: Filter by action the user has access to.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of spaces to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: name
+          in: query
+          description: Filter by space name.
+          schema:
+            type: string
+        - name: next
+          in: query
+          description: Cursor for next page of results.
+          schema:
+            type: string
+        - name: ownerId
+          in: query
+          description: Filter by owner identifier.
+          schema:
+            type: string
+        - name: prev
+          in: query
+          description: Cursor for previous page of results.
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Sort field and order.
+          schema:
+            type: string
+        - name: type
+          in: query
+          description: Filter by space type.
+          schema:
+            type: string
+            enum:
+              - shared
+              - managed
+              - data
+      responses:
+        '200':
+          description: Spaces returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createSpace
+      summary: Create a space
+      description: Creates a new shared, managed, or data space.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceCreate'
+      responses:
+        '201':
+          description: Space created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: Conflict. A space with this name already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /spaces/{spaceId}:
+    parameters:
+      - $ref: '#/components/parameters/SpaceId'
+    get:
+      operationId: getSpace
+      summary: Retrieve a space
+      description: Retrieves a specific space by its identifier.
+      tags:
+        - Spaces
+      responses:
+        '200':
+          description: Space returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updateSpace
+      summary: Update a space
+      description: Updates the properties of a specific space.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceUpdate'
+      responses:
+        '200':
+          description: Space updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: patchSpace
+      summary: Patch space properties
+      description: >-
+        Updates specific properties of a space using JSON Patch operations
+        on /name, /ownerId, and /description.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatch'
+      responses:
+        '200':
+          description: Space patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteSpace
+      summary: Delete a space
+      description: Deletes a specific space by its identifier.
+      tags:
+        - Spaces
+      responses:
+        '204':
+          description: Space deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /spaces/{spaceId}/assignments:
+    parameters:
+      - $ref: '#/components/parameters/SpaceId'
+    get:
+      operationId: listSpaceAssignments
+      summary: List space assignments
+      description: >-
+        Retrieves all user and group role assignments for a specific space.
+      tags:
+        - Spaces
+      responses:
+        '200':
+          description: Assignments returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignmentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createSpaceAssignment
+      summary: Assign user or group to space
+      description: Creates a new role assignment for a user or group in a space.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceAssignmentCreate'
+      responses:
+        '201':
+          description: Assignment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /spaces/{spaceId}/assignments/{assignmentId}:
+    parameters:
+      - $ref: '#/components/parameters/SpaceId'
+      - $ref: '#/components/parameters/AssignmentId'
+    get:
+      operationId: getSpaceAssignment
+      summary: Retrieve a space assignment
+      description: Retrieves a specific assignment by its identifier.
+      tags:
+        - Spaces
+      responses:
+        '200':
+          description: Assignment returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updateSpaceAssignment
+      summary: Update a space assignment
+      description: Updates the role for an existing space assignment.
+      tags:
+        - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - role
+              properties:
+                role:
+                  type: string
+                  description: The new role for the assignment.
+                  enum:
+                    - consumer
+                    - contributor
+                    - dataconsumer
+                    - facilitator
+                    - manager
+                    - operator
+                    - producer
+                    - publisher
+                    - basicconsumer
+      responses:
+        '200':
+          description: Assignment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteSpaceAssignment
+      summary: Delete a space assignment
+      description: Removes a user or group assignment from the space.
+      tags:
+        - Spaces
+      responses:
+        '204':
+          description: Assignment deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /spaces/types:
+    get:
+      operationId: listSpaceTypes
+      summary: List space types
+      description: Retrieves the available space types for the tenant.
+      tags:
+        - Spaces
+      responses:
+        '200':
+          description: Space types returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: The space type name.
+                        description:
+                          type: string
+                          description: Description of the space type.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  # ── Reloads ─────────────────────────────────────────────────────────────────
+  /reloads:
+    get:
+      operationId: listReloads
+      summary: List reloads
+      description: >-
+        Finds and returns reload records for a specific app. The appId query
+        parameter is required.
+      tags:
+        - Reloads
+      parameters:
+        - name: appId
+          in: query
+          required: true
+          description: The identifier of the app to list reloads for.
+          schema:
+            type: string
+            format: uuid
+        - name: filter
+          in: query
+          description: >-
+            SCIM filter expression for advanced filtering of reload records.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: Maximum number of reload records to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+        - name: log
+          in: query
+          description: >-
+            When true, includes the script log in the response.
+          schema:
+            type: boolean
+            default: false
+        - name: next
+          in: query
+          description: Cursor for the next page of results.
+          schema:
+            type: string
+        - name: prev
+          in: query
+          description: Cursor for the previous page of results.
+          schema:
+            type: string
+        - name: partial
+          in: query
+          description: >-
+            When true, returns partial reload information.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Reload records returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReloadList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: reloadApp
+      summary: Reload an app
+      description: >-
+        Triggers a reload of an app to refresh its data from connected
+        sources. Rate limited to 50 requests per minute.
+      tags:
+        - Reloads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReloadCreate'
+      responses:
+        '201':
+          description: Reload initiated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reload'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /reloads/{reloadId}:
+    parameters:
+      - $ref: '#/components/parameters/ReloadId'
+    get:
+      operationId: getReload
+      summary: Retrieve a reload record
+      description: Retrieves a specific reload record by its identifier.
+      tags:
+        - Reloads
+      responses:
+        '200':
+          description: Reload record returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reload'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /reloads/{reloadId}/actions/cancel:
+    parameters:
+      - $ref: '#/components/parameters/ReloadId'
+    post:
+      operationId: cancelReload
+      summary: Cancel a reload
+      description: >-
+        Cancels a queued or in-progress reload. Rate limited to 50 requests
+        per minute.
+      tags:
+        - Reloads
+      responses:
+        '202':
+          description: Cancel request accepted.
+        '204':
+          description: Reload already completed or cancelled.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Conflict. The reload is in a state that cannot be cancelled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        OAuth 2.0 bearer token obtained from the Qlik Cloud tenant. Use the
+        /oauth/token endpoint or interactive login to obtain a token.
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        API key generated from the Qlik Cloud Management Console. Passed in
+        the Authorization header as Bearer <api-key>.
+
+  parameters:
+    AppId:
+      name: appId
+      in: path
+      required: true
+      description: The unique identifier of the app.
+      schema:
+        type: string
+    SpaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: The unique identifier of the space.
+      schema:
+        type: string
+    AssignmentId:
+      name: assignmentId
+      in: path
+      required: true
+      description: The unique identifier of the space assignment.
+      schema:
+        type: string
+    ReloadId:
+      name: reloadId
+      in: path
+      required: true
+      description: The unique identifier of the reload.
+      schema:
+        type: string
+
+  schemas:
+    # ── App Schemas ─────────────────────────────────────────────────────────
+    AppAttributes:
+      type: object
+      description: Represents a Qlik Sense analytics application.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the app.
+        name:
+          type: string
+          description: The name of the app.
+        description:
+          type: string
+          description: The description of the app.
+        thumbnail:
+          type: string
+          description: The URL to the app thumbnail image.
+        lastReloadTime:
+          type: string
+          format: date-time
+          description: The date and time of the last successful reload.
+        createdDate:
+          type: string
+          format: date-time
+          description: The date and time when the app was created.
+        modifiedDate:
+          type: string
+          format: date-time
+          description: The date and time when the app was last modified.
+        owner:
+          type: string
+          description: The identifier of the app owner.
+        ownerId:
+          type: string
+          description: The identifier of the user who owns the app.
+        published:
+          type: boolean
+          description: Indicates whether the app is published.
+        publishTime:
+          type: string
+          format: date-time
+          description: The date and time when the app was published.
+        custom:
+          type: object
+          description: Custom properties assigned to the app.
+          additionalProperties: true
+        dynamicColor:
+          type: string
+          description: Dynamic color expression for the app.
+        hasSectionAccess:
+          type: boolean
+          description: >-
+            Indicates whether the app uses section access for row-level
+            security.
+        isDirectQueryMode:
+          type: boolean
+          description: >-
+            Indicates whether the app uses Direct Query mode.
+        encrypted:
+          type: boolean
+          description: Indicates whether the app is encrypted.
+        originAppId:
+          type: string
+          description: >-
+            The identifier of the origin app if the app was copied or
+            published.
+        spaceId:
+          type: string
+          description: The identifier of the space containing the app.
+        tenantId:
+          type: string
+          description: The identifier of the tenant the app belongs to.
+        usage:
+          type: string
+          description: The intended use of the app.
+          enum:
+            - ANALYTICS
+            - DATA_PREPARATION
+            - DATAFLOW_PREP
+        links:
+          type: object
+          description: HATEOAS links for the app resource.
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            open:
+              type: object
+              properties:
+                href:
+                  type: string
+            thumbnail:
+              type: object
+              properties:
+                href:
+                  type: string
+
+    AppCreate:
+      type: object
+      description: Payload to create a new app.
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: The name of the new app.
+          maxLength: 256
+        description:
+          type: string
+          description: A description for the new app.
+        spaceId:
+          type: string
+          description: >-
+            The identifier of the space to create the app in. Uses the
+            personal space if omitted.
+
+    AppUpdate:
+      type: object
+      description: Payload to update an existing app.
+      properties:
+        name:
+          type: string
+          description: The new name for the app.
+          maxLength: 256
+        description:
+          type: string
+          description: The updated description for the app.
+
+    AppCopy:
+      type: object
+      description: Payload to copy an app.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name for the copied app. If omitted, the original name is
+            used with a copy suffix.
+        spaceId:
+          type: string
+          description: >-
+            The identifier of the space for the copied app. If omitted, the
+            copy is placed in the personal space.
+        description:
+          type: string
+          description: The description for the copied app.
+
+    AppPublish:
+      type: object
+      description: Payload to publish an app to a managed space.
+      required:
+        - spaceId
+      properties:
+        spaceId:
+          type: string
+          description: The identifier of the managed space to publish into.
+        data:
+          type: string
+          description: >-
+            If set to source, the published app includes the source app
+            data.
+          enum:
+            - source
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: >-
+                The name of the published app. Defaults to the source app
+                name.
+            description:
+              type: string
+              description: The description of the published app.
+
+    AppDataMetadata:
+      type: object
+      description: Data model and reload statistics metadata for an app.
+      properties:
+        fields:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the field.
+              tags:
+                type: array
+                items:
+                  type: string
+              isSystem:
+                type: boolean
+                description: Whether this is a system-generated field.
+        tables:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the table.
+              noOfRows:
+                type: integer
+                description: Number of rows in the table.
+              noOfFields:
+                type: integer
+                description: Number of fields in the table.
+              noOfKeyFields:
+                type: integer
+                description: Number of key fields in the table.
+              byteSize:
+                type: integer
+                description: Table size in bytes.
+        reloadMeta:
+          type: object
+          properties:
+            cpuTimeSpentMs:
+              type: integer
+              description: CPU time spent during last reload in milliseconds.
+            peakMemoryBytes:
+              type: integer
+              description: Peak memory consumption during last reload.
+
+    AppDataLineage:
+      type: object
+      description: Data lineage information for an app.
+      properties:
+        discriminator:
+          type: string
+          description: The type of lineage source.
+        statement:
+          type: string
+          description: The load statement from the data connection.
+
+    AppScript:
+      type: object
+      description: A script version for an app.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the script version.
+        script:
+          type: string
+          description: The content of the load script.
+        createdDate:
+          type: string
+          format: date-time
+          description: When the script version was created.
+        modifiedDate:
+          type: string
+          format: date-time
+          description: When the script version was last modified.
+
+    ReloadLog:
+      type: object
+      description: Metadata about an app reload log.
+      properties:
+        id:
+          type: string
+          description: The reload identifier.
+        createdDate:
+          type: string
+          format: date-time
+          description: When the reload was executed.
+        success:
+          type: boolean
+          description: Whether the reload was successful.
+        duration:
+          type: integer
+          description: Duration of the reload in milliseconds.
+
+    # ── Space Schemas ───────────────────────────────────────────────────────
+    Space:
+      type: object
+      description: Represents a space in Qlik Cloud.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the space.
+        name:
+          type: string
+          description: The name of the space.
+        type:
+          type: string
+          description: The type of the space.
+          enum:
+            - shared
+            - managed
+            - data
+        description:
+          type: string
+          description: The description of the space.
+        ownerId:
+          type: string
+          description: The identifier of the space owner.
+        tenantId:
+          type: string
+          description: The identifier of the tenant the space belongs to.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the space was created.
+        createdBy:
+          type: string
+          description: The identifier of the user who created the space.
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the space was last updated.
+        meta:
+          type: object
+          description: Metadata about the space.
+          properties:
+            roles:
+              type: array
+              items:
+                type: string
+              description: >-
+                The roles the current user has on this space.
+            actions:
+              type: array
+              items:
+                type: string
+              description: >-
+                The actions the current user can perform on this space.
+            assignableRoles:
+              type: array
+              items:
+                type: string
+              description: Roles that can be assigned in this space.
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            assignments:
+              type: object
+              properties:
+                href:
+                  type: string
+
+    SpaceList:
+      type: object
+      description: Paginated list of spaces.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Space'
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+            prev:
+              type: object
+              properties:
+                href:
+                  type: string
+
+    SpaceCreate:
+      type: object
+      description: Payload to create a new space.
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: The name of the space.
+        type:
+          type: string
+          description: The type of space to create.
+          enum:
+            - shared
+            - managed
+            - data
+        description:
+          type: string
+          description: The description of the space.
+
+    SpaceUpdate:
+      type: object
+      description: Payload to update an existing space.
+      properties:
+        name:
+          type: string
+          description: The updated name for the space.
+        ownerId:
+          type: string
+          description: The identifier of the new owner.
+        description:
+          type: string
+          description: The updated description.
+
+    SpaceAssignment:
+      type: object
+      description: A role assignment for a user or group within a space.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the assignment.
+        type:
+          type: string
+          description: The type of assignee.
+          enum:
+            - user
+            - group
+        assigneeId:
+          type: string
+          description: The identifier of the assignee (user or group).
+        roles:
+          type: array
+          items:
+            type: string
+          description: The roles assigned.
+        spaceId:
+          type: string
+          description: The space this assignment belongs to.
+        tenantId:
+          type: string
+          description: The tenant identifier.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the assignment was created.
+        createdBy:
+          type: string
+          description: Who created the assignment.
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the assignment was last updated.
+
+    SpaceAssignmentList:
+      type: object
+      description: List of space assignments.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpaceAssignment'
+
+    SpaceAssignmentCreate:
+      type: object
+      description: Payload to create a space role assignment.
+      required:
+        - type
+        - assigneeId
+        - roles
+      properties:
+        type:
+          type: string
+          description: The type of assignee.
+          enum:
+            - user
+            - group
+        assigneeId:
+          type: string
+          description: The identifier of the user or group.
+        roles:
+          type: array
+          items:
+            type: string
+            enum:
+              - consumer
+              - contributor
+              - dataconsumer
+              - facilitator
+              - manager
+              - operator
+              - producer
+              - publisher
+              - basicconsumer
+          description: The roles to assign.
+
+    # ── Reload Schemas ──────────────────────────────────────────────────────
+    Reload:
+      type: object
+      description: Represents a reload record in Qlik Cloud.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the reload.
+        appId:
+          type: string
+          description: The identifier of the app that was reloaded.
+        tenantId:
+          type: string
+          description: The tenant identifier.
+        userId:
+          type: string
+          description: The identifier of the user who triggered the reload.
+        type:
+          type: string
+          description: The type of reload.
+          enum:
+            - hub
+            - external
+            - chronos
+            - automations
+        status:
+          type: string
+          description: The current status of the reload.
+          enum:
+            - QUEUED
+            - RELOADING
+            - CANCELING
+            - SUCCEEDED
+            - FAILED
+            - CANCELED
+            - EXCEEDED_LIMIT
+        partial:
+          type: boolean
+          description: Whether this was a partial reload.
+        log:
+          type: string
+          description: The script log content when requested.
+        creationTime:
+          type: string
+          format: date-time
+          description: When the reload was created.
+        startTime:
+          type: string
+          format: date-time
+          description: When the reload started executing.
+        endTime:
+          type: string
+          format: date-time
+          description: When the reload finished.
+        duration:
+          type: string
+          description: The duration of the reload in ISO 8601 format.
+        engineTime:
+          type: string
+          description: The engine processing time.
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+
+    ReloadList:
+      type: object
+      description: Paginated list of reloads.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reload'
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+            prev:
+              type: object
+              properties:
+                href:
+                  type: string
+
+    ReloadCreate:
+      type: object
+      description: Payload to trigger an app reload.
+      required:
+        - appId
+      properties:
+        appId:
+          type: string
+          description: The identifier of the app to reload.
+        partial:
+          type: boolean
+          description: >-
+            When true, performs a partial reload which adds data to the
+            existing data model without removing previous data.
+          default: false
+        variables:
+          type: array
+          description: >-
+            Variables to pass into the reload script. Maximum of 20
+            variables, each with a maximum name and value length of 256
+            characters.
+          maxItems: 20
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The variable name.
+                maxLength: 256
+              value:
+                type: string
+                description: The variable value.
+                maxLength: 256
+
+    # ── Common Schemas ──────────────────────────────────────────────────────
+    JsonPatch:
+      type: object
+      description: A JSON Patch operation per RFC 6902.
+      required:
+        - op
+        - path
+      properties:
+        op:
+          type: string
+          description: The patch operation.
+          enum:
+            - add
+            - remove
+            - replace
+        path:
+          type: string
+          description: The JSON pointer to the target field.
+        value:
+          description: The value for the operation.
+
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The error code.
+              title:
+                type: string
+                description: A short summary of the error.
+              detail:
+                type: string
+                description: A detailed error message.
+              status:
+                type: string
+                description: The HTTP status code as a string.
+              meta:
+                type: object
+                description: Additional error metadata.
+                additionalProperties: true
+
+  responses:
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error. An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'

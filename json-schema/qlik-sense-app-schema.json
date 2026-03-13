@@ -1,0 +1,319 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://qlik.dev/schemas/qlik-sense-app-schema.json",
+  "title": "Qlik Sense App",
+  "description": "Schema representing a Qlik Sense analytics application in Qlik Cloud, including its metadata, ownership, space assignment, and reload information.",
+  "type": "object",
+  "required": [
+    "id",
+    "name"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the app, assigned by the Qlik Cloud platform."
+    },
+    "name": {
+      "type": "string",
+      "description": "The display name of the app.",
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "A human-readable description of the app and its purpose."
+    },
+    "thumbnail": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL to the app thumbnail image."
+    },
+    "lastReloadTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time of the most recent successful data reload in ISO 8601 format."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the app was initially created."
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the app was last modified."
+    },
+    "owner": {
+      "type": "string",
+      "description": "The display name of the app owner."
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "The unique identifier of the user who owns the app."
+    },
+    "published": {
+      "type": "boolean",
+      "description": "Indicates whether the app has been published to a managed space.",
+      "default": false
+    },
+    "publishTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the app was published. Null if the app is not published."
+    },
+    "custom": {
+      "type": "object",
+      "description": "Custom properties assigned to the app as key-value pairs.",
+      "additionalProperties": true
+    },
+    "dynamicColor": {
+      "type": "string",
+      "description": "A color expression evaluated dynamically for the app representation in the hub."
+    },
+    "hasSectionAccess": {
+      "type": "boolean",
+      "description": "Indicates whether the app uses section access for row-level security.",
+      "default": false
+    },
+    "isDirectQueryMode": {
+      "type": "boolean",
+      "description": "Indicates whether the app operates in Direct Query mode, querying data sources in real time rather than loading data into memory.",
+      "default": false
+    },
+    "encrypted": {
+      "type": "boolean",
+      "description": "Indicates whether the app data is encrypted at rest using customer-managed keys.",
+      "default": false
+    },
+    "originAppId": {
+      "type": "string",
+      "description": "The identifier of the origin app if this app was created by copying or publishing another app."
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "The identifier of the space containing the app. Null if the app is in the personal space."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "The identifier of the Qlik Cloud tenant the app belongs to."
+    },
+    "usage": {
+      "type": "string",
+      "description": "The intended use case for the app.",
+      "enum": [
+        "ANALYTICS",
+        "DATA_PREPARATION",
+        "DATAFLOW_PREP"
+      ]
+    },
+    "links": {
+      "type": "object",
+      "description": "HATEOAS links for navigating related resources.",
+      "properties": {
+        "self": {
+          "$ref": "#/$defs/Link"
+        },
+        "open": {
+          "$ref": "#/$defs/Link"
+        },
+        "thumbnail": {
+          "$ref": "#/$defs/Link"
+        }
+      }
+    },
+    "space": {
+      "$ref": "#/$defs/SpaceReference",
+      "description": "Reference to the space containing this app."
+    },
+    "reload": {
+      "$ref": "#/$defs/ReloadReference",
+      "description": "Reference to the most recent reload of this app."
+    }
+  },
+  "$defs": {
+    "Link": {
+      "type": "object",
+      "description": "A hypermedia link.",
+      "properties": {
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URL of the linked resource."
+        }
+      },
+      "required": [
+        "href"
+      ]
+    },
+    "SpaceReference": {
+      "type": "object",
+      "description": "A reference to a Qlik Cloud space that contains and governs access to resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the space."
+        },
+        "name": {
+          "type": "string",
+          "description": "The display name of the space."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of space.",
+          "enum": [
+            "shared",
+            "managed",
+            "data"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the space."
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "The identifier of the space owner."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The identifier of the tenant the space belongs to."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the space was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the space was last updated."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "ReloadReference": {
+      "type": "object",
+      "description": "A reference to a data reload operation for a Qlik Sense app.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the reload."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the reload.",
+          "enum": [
+            "QUEUED",
+            "RELOADING",
+            "CANCELING",
+            "SUCCEEDED",
+            "FAILED",
+            "CANCELED",
+            "EXCEEDED_LIMIT"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "How the reload was triggered.",
+          "enum": [
+            "hub",
+            "external",
+            "chronos",
+            "automations"
+          ]
+        },
+        "partial": {
+          "type": "boolean",
+          "description": "Whether this was a partial reload.",
+          "default": false
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the reload was created."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the reload started executing."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the reload finished."
+        },
+        "duration": {
+          "type": "string",
+          "description": "The duration of the reload in ISO 8601 duration format."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "SpaceAssignment": {
+      "type": "object",
+      "description": "A role assignment for a user or group within a space.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the assignment."
+        },
+        "type": {
+          "type": "string",
+          "description": "Whether the assignee is a user or group.",
+          "enum": [
+            "user",
+            "group"
+          ]
+        },
+        "assigneeId": {
+          "type": "string",
+          "description": "The identifier of the assigned user or group."
+        },
+        "roles": {
+          "type": "array",
+          "description": "The roles granted to the assignee in this space.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "consumer",
+              "contributor",
+              "dataconsumer",
+              "facilitator",
+              "manager",
+              "operator",
+              "producer",
+              "publisher",
+              "basicconsumer"
+            ]
+          }
+        },
+        "spaceId": {
+          "type": "string",
+          "description": "The space this assignment applies to."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the assignment was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the assignment was last updated."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "assigneeId",
+        "roles"
+      ]
+    }
+  }
+}

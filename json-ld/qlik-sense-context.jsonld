@@ -1,0 +1,301 @@
+{
+  "@context": {
+    "@version": 1.1,
+
+    "qlik": "https://qlik.dev/schemas/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+
+    "QlikApp": {
+      "@id": "qlik:QlikApp",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "thumbnail": {
+          "@id": "schema:thumbnailUrl",
+          "@type": "@id"
+        },
+        "lastReloadTime": {
+          "@id": "qlik:lastReloadTime",
+          "@type": "xsd:dateTime"
+        },
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "owner": {
+          "@id": "schema:creator",
+          "@type": "xsd:string"
+        },
+        "ownerId": {
+          "@id": "qlik:ownerId",
+          "@type": "xsd:string"
+        },
+        "published": {
+          "@id": "qlik:published",
+          "@type": "xsd:boolean"
+        },
+        "publishTime": {
+          "@id": "schema:datePublished",
+          "@type": "xsd:dateTime"
+        },
+        "hasSectionAccess": {
+          "@id": "qlik:hasSectionAccess",
+          "@type": "xsd:boolean"
+        },
+        "isDirectQueryMode": {
+          "@id": "qlik:isDirectQueryMode",
+          "@type": "xsd:boolean"
+        },
+        "encrypted": {
+          "@id": "qlik:encrypted",
+          "@type": "xsd:boolean"
+        },
+        "originAppId": {
+          "@id": "dcterms:source",
+          "@type": "xsd:string"
+        },
+        "spaceId": {
+          "@id": "qlik:spaceId",
+          "@type": "xsd:string"
+        },
+        "tenantId": {
+          "@id": "qlik:tenantId",
+          "@type": "xsd:string"
+        },
+        "usage": {
+          "@id": "qlik:usage",
+          "@type": "xsd:string"
+        },
+        "dynamicColor": {
+          "@id": "qlik:dynamicColor",
+          "@type": "xsd:string"
+        },
+        "space": {
+          "@id": "qlik:space",
+          "@type": "@id"
+        },
+        "reload": {
+          "@id": "qlik:reload",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "QlikSpace": {
+      "@id": "qlik:QlikSpace",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "qlik:spaceType",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "schema:description",
+          "@type": "xsd:string"
+        },
+        "ownerId": {
+          "@id": "qlik:ownerId",
+          "@type": "xsd:string"
+        },
+        "tenantId": {
+          "@id": "qlik:tenantId",
+          "@type": "xsd:string"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "createdBy": {
+          "@id": "dcterms:creator",
+          "@type": "xsd:string"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "assignments": {
+          "@id": "qlik:assignments",
+          "@type": "@id",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "QlikReload": {
+      "@id": "qlik:QlikReload",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "appId": {
+          "@id": "qlik:appId",
+          "@type": "xsd:string"
+        },
+        "tenantId": {
+          "@id": "qlik:tenantId",
+          "@type": "xsd:string"
+        },
+        "userId": {
+          "@id": "qlik:userId",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "qlik:reloadType",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "qlik:reloadStatus",
+          "@type": "xsd:string"
+        },
+        "partial": {
+          "@id": "qlik:partial",
+          "@type": "xsd:boolean"
+        },
+        "log": {
+          "@id": "qlik:reloadLog",
+          "@type": "xsd:string"
+        },
+        "creationTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "startTime": {
+          "@id": "qlik:startTime",
+          "@type": "xsd:dateTime"
+        },
+        "endTime": {
+          "@id": "qlik:endTime",
+          "@type": "xsd:dateTime"
+        },
+        "duration": {
+          "@id": "schema:duration",
+          "@type": "xsd:duration"
+        },
+        "engineTime": {
+          "@id": "qlik:engineTime",
+          "@type": "xsd:duration"
+        }
+      }
+    },
+
+    "QlikSpaceAssignment": {
+      "@id": "qlik:QlikSpaceAssignment",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "qlik:assigneeType",
+          "@type": "xsd:string"
+        },
+        "assigneeId": {
+          "@id": "qlik:assigneeId",
+          "@type": "xsd:string"
+        },
+        "roles": {
+          "@id": "qlik:roles",
+          "@container": "@set"
+        },
+        "spaceId": {
+          "@id": "qlik:spaceId",
+          "@type": "xsd:string"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "QlikTenant": {
+      "@id": "qlik:QlikTenant",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "hostnames": {
+          "@id": "qlik:hostnames",
+          "@container": "@set"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "status": {
+          "@id": "qlik:tenantStatus",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "QlikDataConnection": {
+      "@id": "qlik:QlikDataConnection",
+      "@context": {
+        "id": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "qlik:connectionType",
+          "@type": "xsd:string"
+        },
+        "spaceId": {
+          "@id": "qlik:spaceId",
+          "@type": "xsd:string"
+        },
+        "ownerId": {
+          "@id": "qlik:ownerId",
+          "@type": "xsd:string"
+        },
+        "createdDate": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "modifiedDate": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

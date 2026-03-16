@@ -1,5 +1,5 @@
 aid: qlik-sense
-name: Qlik Sense APIs
+name: Qlik Sense
 description: APIs for Qlik Sense, a business intelligence and data analytics platform
   providing engine, repository, cloud, embedding, and data integration capabilities.
 type: Index

@@ -1,15 +1,14 @@
 aid: qlik-sense
 name: Qlik Sense
-description: APIs for Qlik Sense, a business intelligence and data analytics platform
-  providing engine, repository, cloud, embedding, and data integration capabilities.
+description: APIs for Qlik Sense, a business intelligence and data analytics platform providing engine, repository, cloud, embedding, and data integration capabilities.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Analytics
   - Business Intelligence
+  - Cloud
   - Data Integration
   - Visualization
-  - Cloud
 url: >-
   https://raw.githubusercontent.com/api-evangelist/qlik-sense/refs/heads/main/apis.yml
 created: '2024-01-15'

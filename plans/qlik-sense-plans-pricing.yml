@@ -4,153 +4,43 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Qlik Sense
 providerId: qlik-sense
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Analytics
   - Business Intelligence
-  - Cloud
-  - Data Integration
-  - Visualization
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Data Visualization
+description: Qlik Sense (now Qlik Cloud Analytics) is sold as a multi-tier SaaS analytics offering, but
+  the public pricing page renders only as a navigation hub — concrete plan names, per-user prices, and
+  capacity figures are gated behind contact-sales engagement.
+notes: Qlik's public pricing pages return navigation content rather than plan tables to anonymous fetch;
+  per-user-per-month prices and capacity figures are not published. Reconciliation reduced the scaffold
+  to a single Contact Sales plan to avoid fabricating tier prices.
+sources:
+  - https://www.qlik.com/us/pricing
 plans:
-  - id: qlik-sense-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Qlik Sense API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Qlik Sense Engine API
-      - name: Qlik Sense Repository API
-      - name: Qlik Cloud Platform REST API
-      - name: Qlik Sense Proxy API
-      - name: Qlik Data Integration API
-      - name: Qlik Embedding API
-  - id: qlik-sense-pro
-    name: Professional
-    type: paid
-    description: Production tier for Qlik Sense. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1000
-        price: TBD
-        userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Qlik Sense Engine API
-      - name: Qlik Sense Repository API
-      - name: Qlik Cloud Platform REST API
-      - name: Qlik Sense Proxy API
-      - name: Qlik Data Integration API
-      - name: Qlik Embedding API
-  - id: qlik-sense-enterprise
-    name: Enterprise
+  - id: qlik-sense-contact-sales
+    name: Contact Sales
     type: enterprise
-    description: Custom-negotiated tier for Qlik Sense. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
+    description: Qlik Cloud Analytics subscription. Plan tier (Standard / Premium / Enterprise), capacity
+      (data + apps), and per-user price are quoted by Qlik sales.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Subscription
+        name: subscription
+        type: subscription
+        metric: seat
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains: []
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
-        userMultiplied: false
+        price: contact sales
+        userMultiplied: true
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Qlik Sense Engine API
-      - name: Qlik Sense Repository API
-      - name: Qlik Cloud Platform REST API
-      - name: Qlik Sense Proxy API
-      - name: Qlik Data Integration API
-      - name: Qlik Embedding API
+      - name: Qlik Cloud Analytics
+      - name: Associative Engine
+      - name: Data Connectors
+      - name: Embedded and Custom Apps
+      - name: Customer Success Manager
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

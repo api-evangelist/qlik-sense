@@ -4,111 +4,33 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Qlik Sense
 providerId: qlik-sense
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Analytics
   - Business Intelligence
-  - Cloud
-  - Data Integration
-  - Visualization
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Qlik Sense API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: Qlik Cloud Analytics exposes platform and management APIs to authenticated tenants; the
+  pricing-page tier is gated and per-tier API rate-limit numbers are not published on the public marketing
+  site. Authoritative limits live in qlik.dev and the tenant developer portal.
+notes: Qlik pricing pages did not return plan tier or rate-limit numbers; reconciliation kept the rate-limit
+  record as a pointer to the qlik.dev developer documentation rather than fabricating per-second values.
+sources:
+  - https://qlik.dev/
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Qlik Sense Engine API
-      - Qlik Sense Repository API
-      - Qlik Cloud Platform REST API
-      - Qlik Sense Proxy API
-      - Qlik Data Integration API
-      - Qlik Embedding API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Qlik Sense Engine API
-      - Qlik Sense Repository API
-      - Qlik Cloud Platform REST API
-      - Qlik Sense Proxy API
-      - Qlik Data Integration API
-      - Qlik Embedding API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Qlik Sense Engine API
-      - Qlik Sense Repository API
-      - Qlik Cloud Platform REST API
-      - Qlik Sense Proxy API
-      - Qlik Data Integration API
-      - Qlik Embedding API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Qlik Sense Engine API
-      - Qlik Sense Repository API
-      - Qlik Cloud Platform REST API
-      - Qlik Sense Proxy API
-      - Qlik Data Integration API
-      - Qlik Embedding API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Qlik Sense Engine API
-      - Qlik Sense Repository API
-      - Qlik Cloud Platform REST API
-      - Qlik Sense Proxy API
-      - Qlik Data Integration API
-      - Qlik Embedding API
+  - name: Tenant API limits
+    scope: tenant
+    metric: varies
+    limit: 'see qlik.dev API reference'
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Tenant Scoping
+    description: API throttling is applied per tenant; specific limits are documented in the qlik.dev
+      developer reference and visible to authenticated tenant administrators.
+  - name: Backoff
+    description: Clients should honor 429 responses, back off, and retry with jitter; specific Retry-After
+      semantics depend on the endpoint family.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

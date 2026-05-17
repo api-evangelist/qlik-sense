@@ -129,7 +129,7 @@ common:
     url: https://github.com/qlik-oss
   - type: Support
     url: https://community.qlik.com
-  - type: Status
+  - type: StatusPage
     url: https://status.qlikcloud.com
   - type: Blog
     url: https://www.qlik.com/blog

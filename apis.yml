@@ -15,7 +15,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/qlik-sense/refs/heads/main/apis.yml
 created: '2024-01-15'
-modified: '2026-04-28'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
   - aid: qlik-sense:qlik-sense-engine-api
@@ -145,6 +145,9 @@ common:
     url: https://www.qlik.com/us/pricing/data-integration-products-pricing
   - type: Integrations
     url: https://www.qlik.com/us/partners
+  - name: MCP Server
+    url: https://github.com/qlik-oss/qlik-mcp-registry
+    type: MCPServer
 integrations:
   - name: Qlik
   - name: Company

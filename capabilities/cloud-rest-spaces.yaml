@@ -1,0 +1,474 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Cloud REST API — Spaces
+  description: 'Qlik Cloud REST API — Spaces. 12 operations. Lead operation: List spaces. Self-contained Naftiko capability
+    covering one Qlik Sense business surface.'
+  tags:
+  - Qlik Sense
+  - Spaces
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_API_KEY: QLIK_SENSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-rest-spaces
+    baseUri: https://{tenant}.{region}.qlikcloud.com/api/v1
+    description: Qlik Cloud REST API — Spaces business capability. Self-contained, no shared references.
+    resources:
+    - name: spaces
+      path: /spaces
+      operations:
+      - name: listspaces
+        method: GET
+        description: List spaces
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: action
+          in: query
+          type: string
+          description: Filter by action the user has access to.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of spaces to return.
+        - name: name
+          in: query
+          type: string
+          description: Filter by space name.
+        - name: next
+          in: query
+          type: string
+          description: Cursor for next page of results.
+        - name: ownerId
+          in: query
+          type: string
+          description: Filter by owner identifier.
+        - name: prev
+          in: query
+          type: string
+          description: Cursor for previous page of results.
+        - name: sort
+          in: query
+          type: string
+          description: Sort field and order.
+        - name: type
+          in: query
+          type: string
+          description: Filter by space type.
+      - name: createspace
+        method: POST
+        description: Create a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: spaces-types
+      path: /spaces/types
+      operations:
+      - name: listspacetypes
+        method: GET
+        description: List space types
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: spaces-spaceId
+      path: /spaces/{spaceId}
+      operations:
+      - name: getspace
+        method: GET
+        description: Retrieve a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatespace
+        method: PUT
+        description: Update a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchspace
+        method: PATCH
+        description: Patch space properties
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletespace
+        method: DELETE
+        description: Delete a space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: spaces-spaceId-assignments
+      path: /spaces/{spaceId}/assignments
+      operations:
+      - name: listspaceassignments
+        method: GET
+        description: List space assignments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createspaceassignment
+        method: POST
+        description: Assign user or group to space
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: spaces-spaceId-assignments-assignmentId
+      path: /spaces/{spaceId}/assignments/{assignmentId}
+      operations:
+      - name: getspaceassignment
+        method: GET
+        description: Retrieve a space assignment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatespaceassignment
+        method: PUT
+        description: Update a space assignment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletespaceassignment
+        method: DELETE
+        description: Delete a space assignment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.QLIK_SENSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-rest-spaces-rest
+    port: 8080
+    description: REST adapter for Qlik Cloud REST API — Spaces. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/spaces
+      name: spaces
+      description: REST surface for spaces.
+      operations:
+      - method: GET
+        name: listspaces
+        description: List spaces
+        call: cloud-rest-spaces.listspaces
+        with:
+          action: rest.action
+          limit: rest.limit
+          name: rest.name
+          next: rest.next
+          ownerId: rest.ownerId
+          prev: rest.prev
+          sort: rest.sort
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createspace
+        description: Create a space
+        call: cloud-rest-spaces.createspace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/types
+      name: spaces-types
+      description: REST surface for spaces-types.
+      operations:
+      - method: GET
+        name: listspacetypes
+        description: List space types
+        call: cloud-rest-spaces.listspacetypes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}
+      name: spaces-spaceid
+      description: REST surface for spaces-spaceId.
+      operations:
+      - method: GET
+        name: getspace
+        description: Retrieve a space
+        call: cloud-rest-spaces.getspace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatespace
+        description: Update a space
+        call: cloud-rest-spaces.updatespace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchspace
+        description: Patch space properties
+        call: cloud-rest-spaces.patchspace
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletespace
+        description: Delete a space
+        call: cloud-rest-spaces.deletespace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/assignments
+      name: spaces-spaceid-assignments
+      description: REST surface for spaces-spaceId-assignments.
+      operations:
+      - method: GET
+        name: listspaceassignments
+        description: List space assignments
+        call: cloud-rest-spaces.listspaceassignments
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createspaceassignment
+        description: Assign user or group to space
+        call: cloud-rest-spaces.createspaceassignment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/spaces/{spaceid}/assignments/{assignmentid}
+      name: spaces-spaceid-assignments-assignmentid
+      description: REST surface for spaces-spaceId-assignments-assignmentId.
+      operations:
+      - method: GET
+        name: getspaceassignment
+        description: Retrieve a space assignment
+        call: cloud-rest-spaces.getspaceassignment
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatespaceassignment
+        description: Update a space assignment
+        call: cloud-rest-spaces.updatespaceassignment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletespaceassignment
+        description: Delete a space assignment
+        call: cloud-rest-spaces.deletespaceassignment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-rest-spaces-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Cloud REST API — Spaces. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-spaces
+      description: List spaces
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.listspaces
+      with:
+        action: tools.action
+        limit: tools.limit
+        name: tools.name
+        next: tools.next
+        ownerId: tools.ownerId
+        prev: tools.prev
+        sort: tools.sort
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-space
+      description: Create a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-rest-spaces.createspace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-space-types
+      description: List space types
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.listspacetypes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-space
+      description: Retrieve a space
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.getspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-space
+      description: Update a space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.updatespace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-space-properties
+      description: Patch space properties
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.patchspace
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-space
+      description: Delete a space
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-rest-spaces.deletespace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-space-assignments
+      description: List space assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.listspaceassignments
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: assign-user-group-space
+      description: Assign user or group to space
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-rest-spaces.createspaceassignment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-space-assignment
+      description: Retrieve a space assignment
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.getspaceassignment
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-space-assignment
+      description: Update a space assignment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: cloud-rest-spaces.updatespaceassignment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-space-assignment
+      description: Delete a space assignment
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-rest-spaces.deletespaceassignment
+      outputParameters:
+      - type: object
+        mapping: $.

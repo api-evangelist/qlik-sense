@@ -1,0 +1,215 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Qlik Cloud REST API — Reloads
+  description: 'Qlik Cloud REST API — Reloads. 4 operations. Lead operation: List reloads. Self-contained Naftiko capability
+    covering one Qlik Sense business surface.'
+  tags:
+  - Qlik Sense
+  - Reloads
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    QLIK_SENSE_API_KEY: QLIK_SENSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-rest-reloads
+    baseUri: https://{tenant}.{region}.qlikcloud.com/api/v1
+    description: Qlik Cloud REST API — Reloads business capability. Self-contained, no shared references.
+    resources:
+    - name: reloads
+      path: /reloads
+      operations:
+      - name: listreloads
+        method: GET
+        description: List reloads
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: appId
+          in: query
+          type: string
+          description: The identifier of the app to list reloads for.
+          required: true
+        - name: filter
+          in: query
+          type: string
+          description: SCIM filter expression for advanced filtering of reload records.
+        - name: limit
+          in: query
+          type: integer
+          description: Maximum number of reload records to return.
+        - name: log
+          in: query
+          type: boolean
+          description: When true, includes the script log in the response.
+        - name: next
+          in: query
+          type: string
+          description: Cursor for the next page of results.
+        - name: prev
+          in: query
+          type: string
+          description: Cursor for the previous page of results.
+        - name: partial
+          in: query
+          type: boolean
+          description: When true, returns partial reload information.
+      - name: reloadapp
+        method: POST
+        description: Reload an app
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: reloads-reloadId
+      path: /reloads/{reloadId}
+      operations:
+      - name: getreload
+        method: GET
+        description: Retrieve a reload record
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reloads-reloadId-actions-cancel
+      path: /reloads/{reloadId}/actions/cancel
+      operations:
+      - name: cancelreload
+        method: POST
+        description: Cancel a reload
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.QLIK_SENSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-rest-reloads-rest
+    port: 8080
+    description: REST adapter for Qlik Cloud REST API — Reloads. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/reloads
+      name: reloads
+      description: REST surface for reloads.
+      operations:
+      - method: GET
+        name: listreloads
+        description: List reloads
+        call: cloud-rest-reloads.listreloads
+        with:
+          appId: rest.appId
+          filter: rest.filter
+          limit: rest.limit
+          log: rest.log
+          next: rest.next
+          prev: rest.prev
+          partial: rest.partial
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: reloadapp
+        description: Reload an app
+        call: cloud-rest-reloads.reloadapp
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reloads/{reloadid}
+      name: reloads-reloadid
+      description: REST surface for reloads-reloadId.
+      operations:
+      - method: GET
+        name: getreload
+        description: Retrieve a reload record
+        call: cloud-rest-reloads.getreload
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reloads/{reloadid}/actions/cancel
+      name: reloads-reloadid-actions-cancel
+      description: REST surface for reloads-reloadId-actions-cancel.
+      operations:
+      - method: POST
+        name: cancelreload
+        description: Cancel a reload
+        call: cloud-rest-reloads.cancelreload
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-rest-reloads-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Qlik Cloud REST API — Reloads. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: list-reloads
+      description: List reloads
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-reloads.listreloads
+      with:
+        appId: tools.appId
+        filter: tools.filter
+        limit: tools.limit
+        log: tools.log
+        next: tools.next
+        prev: tools.prev
+        partial: tools.partial
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: reload-app
+      description: Reload an app
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-rest-reloads.reloadapp
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-reload-record
+      description: Retrieve a reload record
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-rest-reloads.getreload
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-reload
+      description: Cancel a reload
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-rest-reloads.cancelreload
+      outputParameters:
+      - type: object
+        mapping: $.

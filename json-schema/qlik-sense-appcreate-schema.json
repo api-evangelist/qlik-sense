@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppCreate",
+  "title": "AppCreate",
+  "type": "object",
+  "description": "Payload to create a new app.",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the new app.",
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "A description for the new app."
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "The identifier of the space to create the app in. Uses the personal space if omitted."
+    }
+  }
+}

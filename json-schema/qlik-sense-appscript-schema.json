@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppScript",
+  "title": "AppScript",
+  "type": "object",
+  "description": "A script version for an app.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the script version."
+    },
+    "script": {
+      "type": "string",
+      "description": "The content of the load script."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the script version was created."
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the script version was last modified."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpaceAssignmentCreate",
+  "title": "SpaceAssignmentCreate",
+  "type": "object",
+  "description": "Payload to create a space role assignment.",
+  "required": [
+    "type",
+    "assigneeId",
+    "roles"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "The type of assignee.",
+      "enum": [
+        "user",
+        "group"
+      ]
+    },
+    "assigneeId": {
+      "type": "string",
+      "description": "The identifier of the user or group."
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "consumer",
+          "contributor",
+          "dataconsumer",
+          "facilitator",
+          "manager",
+          "operator",
+          "producer",
+          "publisher",
+          "basicconsumer"
+        ]
+      },
+      "description": "The roles to assign."
+    }
+  }
+}

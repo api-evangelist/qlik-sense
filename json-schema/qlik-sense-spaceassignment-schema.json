@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpaceAssignment",
+  "title": "SpaceAssignment",
+  "type": "object",
+  "description": "A role assignment for a user or group within a space.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the assignment."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of assignee.",
+      "enum": [
+        "user",
+        "group"
+      ]
+    },
+    "assigneeId": {
+      "type": "string",
+      "description": "The identifier of the assignee (user or group)."
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The roles assigned."
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "The space this assignment belongs to."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "The tenant identifier."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the assignment was created."
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "Who created the assignment."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the assignment was last updated."
+    }
+  }
+}

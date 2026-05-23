@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Space",
+  "title": "Space",
+  "type": "object",
+  "description": "Represents a space in Qlik Cloud.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the space."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the space."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of the space.",
+      "enum": [
+        "shared",
+        "managed",
+        "data"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the space."
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "The identifier of the space owner."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "The identifier of the tenant the space belongs to."
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the space was created."
+    },
+    "createdBy": {
+      "type": "string",
+      "description": "The identifier of the user who created the space."
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the space was last updated."
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata about the space.",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The roles the current user has on this space."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The actions the current user can perform on this space."
+        },
+        "assignableRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Roles that can be assigned in this space."
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          }
+        },
+        "assignments": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,469 @@
+{
+  "provider": "Qlik Sense",
+  "providerId": "qlik-sense",
+  "kind": "json-structure",
+  "description": "Structural overview of the Qlik Sense API surface; extracted from openapi/.",
+  "schemaCount": 21,
+  "operationCount": 35,
+  "schemas": [
+    {
+      "name": "AppAttributes",
+      "type": "object",
+      "propertyCount": 21,
+      "required": []
+    },
+    {
+      "name": "AppCreate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name"
+      ]
+    },
+    {
+      "name": "AppUpdate",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AppCopy",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AppPublish",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "spaceId"
+      ]
+    },
+    {
+      "name": "AppDataMetadata",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "AppDataLineage",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "AppScript",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "ReloadLog",
+      "type": "object",
+      "propertyCount": 4,
+      "required": []
+    },
+    {
+      "name": "Space",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "SpaceList",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "SpaceCreate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    {
+      "name": "SpaceUpdate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": []
+    },
+    {
+      "name": "SpaceAssignment",
+      "type": "object",
+      "propertyCount": 9,
+      "required": []
+    },
+    {
+      "name": "SpaceAssignmentList",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "SpaceAssignmentCreate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "type",
+        "assigneeId",
+        "roles"
+      ]
+    },
+    {
+      "name": "Reload",
+      "type": "object",
+      "propertyCount": 14,
+      "required": []
+    },
+    {
+      "name": "ReloadList",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    },
+    {
+      "name": "ReloadCreate",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "appId"
+      ]
+    },
+    {
+      "name": "JsonPatch",
+      "type": "object",
+      "propertyCount": 3,
+      "required": [
+        "op",
+        "path"
+      ]
+    },
+    {
+      "name": "ErrorResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/apps",
+      "operationId": "getAppsPrivileges",
+      "summary": "Get app privileges",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apps",
+      "operationId": "createApp",
+      "summary": "Create an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}",
+      "operationId": "getApp",
+      "summary": "Retrieve an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/apps/{appId}",
+      "operationId": "updateApp",
+      "summary": "Update an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/apps/{appId}",
+      "operationId": "deleteApp",
+      "summary": "Delete an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apps/{appId}/copy",
+      "operationId": "copyApp",
+      "summary": "Copy an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apps/{appId}/export",
+      "operationId": "exportApp",
+      "summary": "Export an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apps/import",
+      "operationId": "importApp",
+      "summary": "Import an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apps/{appId}/publish",
+      "operationId": "publishApp",
+      "summary": "Publish an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/apps/{appId}/publish",
+      "operationId": "republishApp",
+      "summary": "Republish an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/apps/{appId}/owner",
+      "operationId": "updateAppOwner",
+      "summary": "Change app owner",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/apps/{appId}/space",
+      "operationId": "moveAppToSpace",
+      "summary": "Move app to a space",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/apps/{appId}/space",
+      "operationId": "removeAppFromSpace",
+      "summary": "Remove app from space",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}/data/metadata",
+      "operationId": "getAppDataMetadata",
+      "summary": "Retrieve data metadata for an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}/data/lineage",
+      "operationId": "getAppDataLineage",
+      "summary": "Retrieve data lineage for an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}/scripts",
+      "operationId": "getAppScripts",
+      "summary": "Retrieve script history",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/apps/{appId}/scripts",
+      "operationId": "setAppScript",
+      "summary": "Set script for an app",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}/reloads/logs",
+      "operationId": "getAppReloadLogs",
+      "summary": "Retrieve script log metadata",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/apps/{appId}/reloads/logs/{reloadId}",
+      "operationId": "getAppReloadLog",
+      "summary": "Retrieve a specific reload log",
+      "tags": [
+        "Apps"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/spaces",
+      "operationId": "listSpaces",
+      "summary": "List spaces",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/spaces",
+      "operationId": "createSpace",
+      "summary": "Create a space",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/spaces/{spaceId}",
+      "operationId": "getSpace",
+      "summary": "Retrieve a space",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/spaces/{spaceId}",
+      "operationId": "updateSpace",
+      "summary": "Update a space",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/spaces/{spaceId}",
+      "operationId": "deleteSpace",
+      "summary": "Delete a space",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/spaces/{spaceId}",
+      "operationId": "patchSpace",
+      "summary": "Patch space properties",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/spaces/{spaceId}/assignments",
+      "operationId": "listSpaceAssignments",
+      "summary": "List space assignments",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/spaces/{spaceId}/assignments",
+      "operationId": "createSpaceAssignment",
+      "summary": "Assign user or group to space",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/spaces/{spaceId}/assignments/{assignmentId}",
+      "operationId": "getSpaceAssignment",
+      "summary": "Retrieve a space assignment",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/spaces/{spaceId}/assignments/{assignmentId}",
+      "operationId": "updateSpaceAssignment",
+      "summary": "Update a space assignment",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/spaces/{spaceId}/assignments/{assignmentId}",
+      "operationId": "deleteSpaceAssignment",
+      "summary": "Delete a space assignment",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/spaces/types",
+      "operationId": "listSpaceTypes",
+      "summary": "List space types",
+      "tags": [
+        "Spaces"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reloads",
+      "operationId": "listReloads",
+      "summary": "List reloads",
+      "tags": [
+        "Reloads"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reloads",
+      "operationId": "reloadApp",
+      "summary": "Reload an app",
+      "tags": [
+        "Reloads"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/reloads/{reloadId}",
+      "operationId": "getReload",
+      "summary": "Retrieve a reload record",
+      "tags": [
+        "Reloads"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/reloads/{reloadId}/actions/cancel",
+      "operationId": "cancelReload",
+      "summary": "Cancel a reload",
+      "tags": [
+        "Reloads"
+      ]
+    }
+  ]
+}

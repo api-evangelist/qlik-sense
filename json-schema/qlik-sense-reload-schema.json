@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Reload",
+  "title": "Reload",
+  "type": "object",
+  "description": "Represents a reload record in Qlik Cloud.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the reload."
+    },
+    "appId": {
+      "type": "string",
+      "description": "The identifier of the app that was reloaded."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "The tenant identifier."
+    },
+    "userId": {
+      "type": "string",
+      "description": "The identifier of the user who triggered the reload."
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of reload.",
+      "enum": [
+        "hub",
+        "external",
+        "chronos",
+        "automations"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "The current status of the reload.",
+      "enum": [
+        "QUEUED",
+        "RELOADING",
+        "CANCELING",
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELED",
+        "EXCEEDED_LIMIT"
+      ]
+    },
+    "partial": {
+      "type": "boolean",
+      "description": "Whether this was a partial reload."
+    },
+    "log": {
+      "type": "string",
+      "description": "The script log content when requested."
+    },
+    "creationTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the reload was created."
+    },
+    "startTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the reload started executing."
+    },
+    "endTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the reload finished."
+    },
+    "duration": {
+      "type": "string",
+      "description": "The duration of the reload in ISO 8601 format."
+    },
+    "engineTime": {
+      "type": "string",
+      "description": "The engine processing time."
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

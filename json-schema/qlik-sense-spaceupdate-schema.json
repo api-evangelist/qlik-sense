@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/SpaceUpdate",
+  "title": "SpaceUpdate",
+  "type": "object",
+  "description": "Payload to update an existing space.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The updated name for the space."
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "The identifier of the new owner."
+    },
+    "description": {
+      "type": "string",
+      "description": "The updated description."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppUpdate",
+  "title": "AppUpdate",
+  "type": "object",
+  "description": "Payload to update an existing app.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The new name for the app.",
+      "maxLength": 256
+    },
+    "description": {
+      "type": "string",
+      "description": "The updated description for the app."
+    }
+  }
+}

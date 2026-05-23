@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppPublish",
+  "title": "AppPublish",
+  "type": "object",
+  "description": "Payload to publish an app to a managed space.",
+  "required": [
+    "spaceId"
+  ],
+  "properties": {
+    "spaceId": {
+      "type": "string",
+      "description": "The identifier of the managed space to publish into."
+    },
+    "data": {
+      "type": "string",
+      "description": "If set to source, the published app includes the source app data.",
+      "enum": [
+        "source"
+      ]
+    },
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the published app. Defaults to the source app name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the published app."
+        }
+      }
+    }
+  }
+}

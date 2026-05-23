@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ErrorResponse",
+  "title": "ErrorResponse",
+  "type": "object",
+  "description": "Standard error response.",
+  "properties": {
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "title": {
+            "type": "string",
+            "description": "A short summary of the error."
+          },
+          "detail": {
+            "type": "string",
+            "description": "A detailed error message."
+          },
+          "status": {
+            "type": "string",
+            "description": "The HTTP status code as a string."
+          },
+          "meta": {
+            "type": "object",
+            "description": "Additional error metadata.",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

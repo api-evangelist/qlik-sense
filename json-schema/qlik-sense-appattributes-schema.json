@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppAttributes",
+  "title": "AppAttributes",
+  "type": "object",
+  "description": "Represents a Qlik Sense analytics application.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique identifier of the app."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the app."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description of the app."
+    },
+    "thumbnail": {
+      "type": "string",
+      "description": "The URL to the app thumbnail image."
+    },
+    "lastReloadTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time of the last successful reload."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the app was created."
+    },
+    "modifiedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the app was last modified."
+    },
+    "owner": {
+      "type": "string",
+      "description": "The identifier of the app owner."
+    },
+    "ownerId": {
+      "type": "string",
+      "description": "The identifier of the user who owns the app."
+    },
+    "published": {
+      "type": "boolean",
+      "description": "Indicates whether the app is published."
+    },
+    "publishTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the app was published."
+    },
+    "custom": {
+      "type": "object",
+      "description": "Custom properties assigned to the app.",
+      "additionalProperties": true
+    },
+    "dynamicColor": {
+      "type": "string",
+      "description": "Dynamic color expression for the app."
+    },
+    "hasSectionAccess": {
+      "type": "boolean",
+      "description": "Indicates whether the app uses section access for row-level security."
+    },
+    "isDirectQueryMode": {
+      "type": "boolean",
+      "description": "Indicates whether the app uses Direct Query mode."
+    },
+    "encrypted": {
+      "type": "boolean",
+      "description": "Indicates whether the app is encrypted."
+    },
+    "originAppId": {
+      "type": "string",
+      "description": "The identifier of the origin app if the app was copied or published."
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "The identifier of the space containing the app."
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "The identifier of the tenant the app belongs to."
+    },
+    "usage": {
+      "type": "string",
+      "description": "The intended use of the app.",
+      "enum": [
+        "ANALYTICS",
+        "DATA_PREPARATION",
+        "DATAFLOW_PREP"
+      ]
+    },
+    "links": {
+      "type": "object",
+      "description": "HATEOAS links for the app resource.",
+      "properties": {
+        "self": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          }
+        },
+        "open": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          }
+        },
+        "thumbnail": {
+          "type": "object",
+          "properties": {
+            "href": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

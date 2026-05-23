@@ -1,0 +1,13 @@
+name: Qlik Sense Domain Vocabulary
+provider: Qlik Sense
+providerId: qlik-sense
+description: Tag-derived vocabulary for the Qlik Sense API surface; sourced from openapi/ tags.
+terms:
+- term: Apps
+  description: Manage Qlik Sense analytics applications including creating, copying, importing, exporting, publishing, and
+    retrieving app metadata.
+- term: Spaces
+  description: Manage spaces, which are logical containers within a tenant that control access for users and groups through
+    role-based assignments.
+- term: Reloads
+  description: Trigger and manage data reloads for apps to refresh data from connected sources.

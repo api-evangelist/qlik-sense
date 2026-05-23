@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppDataLineage",
+  "title": "AppDataLineage",
+  "type": "object",
+  "description": "Data lineage information for an app.",
+  "properties": {
+    "discriminator": {
+      "type": "string",
+      "description": "The type of lineage source."
+    },
+    "statement": {
+      "type": "string",
+      "description": "The load statement from the data connection."
+    }
+  }
+}

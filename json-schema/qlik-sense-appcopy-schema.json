@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppCopy",
+  "title": "AppCopy",
+  "type": "object",
+  "description": "Payload to copy an app.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name for the copied app. If omitted, the original name is used with a copy suffix."
+    },
+    "spaceId": {
+      "type": "string",
+      "description": "The identifier of the space for the copied app. If omitted, the copy is placed in the personal space."
+    },
+    "description": {
+      "type": "string",
+      "description": "The description for the copied app."
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/AppDataMetadata",
+  "title": "AppDataMetadata",
+  "type": "object",
+  "description": "Data model and reload statistics metadata for an app.",
+  "properties": {
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the field."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isSystem": {
+            "type": "boolean",
+            "description": "Whether this is a system-generated field."
+          }
+        }
+      }
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the table."
+          },
+          "noOfRows": {
+            "type": "integer",
+            "description": "Number of rows in the table."
+          },
+          "noOfFields": {
+            "type": "integer",
+            "description": "Number of fields in the table."
+          },
+          "noOfKeyFields": {
+            "type": "integer",
+            "description": "Number of key fields in the table."
+          },
+          "byteSize": {
+            "type": "integer",
+            "description": "Table size in bytes."
+          }
+        }
+      }
+    },
+    "reloadMeta": {
+      "type": "object",
+      "properties": {
+        "cpuTimeSpentMs": {
+          "type": "integer",
+          "description": "CPU time spent during last reload in milliseconds."
+        },
+        "peakMemoryBytes": {
+          "type": "integer",
+          "description": "Peak memory consumption during last reload."
+        }
+      }
+    }
+  }
+}

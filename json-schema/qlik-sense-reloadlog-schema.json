@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReloadLog",
+  "title": "ReloadLog",
+  "type": "object",
+  "description": "Metadata about an app reload log.",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The reload identifier."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the reload was executed."
+    },
+    "success": {
+      "type": "boolean",
+      "description": "Whether the reload was successful."
+    },
+    "duration": {
+      "type": "integer",
+      "description": "Duration of the reload in milliseconds."
+    }
+  }
+}

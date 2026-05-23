@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ReloadCreate",
+  "title": "ReloadCreate",
+  "type": "object",
+  "description": "Payload to trigger an app reload.",
+  "required": [
+    "appId"
+  ],
+  "properties": {
+    "appId": {
+      "type": "string",
+      "description": "The identifier of the app to reload."
+    },
+    "partial": {
+      "type": "boolean",
+      "description": "When true, performs a partial reload which adds data to the existing data model without removing previous data.",
+      "default": false
+    },
+    "variables": {
+      "type": "array",
+      "description": "Variables to pass into the reload script. Maximum of 20 variables, each with a maximum name and value length of 256 characters.",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The variable name.",
+            "maxLength": 256
+          },
+          "value": {
+            "type": "string",
+            "description": "The variable value.",
+            "maxLength": 256
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,839 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Cloud REST API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Apps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get app privileges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps"
+          },
+          "docs": "Retrieves the current user privileges for app operations such as create, read, update, delete, import, and export."
+        },
+        {
+          "info": {
+            "name": "Create an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new analytics app in the specified or personal space."
+        },
+        {
+          "info": {
+            "name": "Retrieve an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Retrieves information for a specific app."
+        },
+        {
+          "info": {
+            "name": "Update an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the information for a specific app."
+        },
+        {
+          "info": {
+            "name": "Delete an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Deletes a specific app."
+        },
+        {
+          "info": {
+            "name": "Copy an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/copy",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Copies a specific app within the tenant."
+        },
+        {
+          "info": {
+            "name": "Export an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/export",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Exports a specific app, returning a temporary download path for the QVF file."
+        },
+        {
+          "info": {
+            "name": "Import an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/import",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the target app."
+              },
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "query",
+                "description": "The space identifier to import the app into. Uses personal space if omitted."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "The import mode for the app."
+              }
+            ]
+          },
+          "docs": "Imports an app from a QVF file into the system."
+        },
+        {
+          "info": {
+            "name": "Publish an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/publish",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publishes an app from a personal or shared space to a managed space."
+        },
+        {
+          "info": {
+            "name": "Republish an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/publish",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Republishes a published app, replacing its content with the source app data."
+        },
+        {
+          "info": {
+            "name": "Change app owner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/owner",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changes the owner of the app."
+        },
+        {
+          "info": {
+            "name": "Move app to a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/space",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the space on a specific app."
+        },
+        {
+          "info": {
+            "name": "Remove app from space",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/space",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Removes the space assignment from the app, moving it to personal space."
+        },
+        {
+          "info": {
+            "name": "Retrieve data metadata for an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/data/metadata",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Retrieves data model and reload statistics metadata for an app."
+        },
+        {
+          "info": {
+            "name": "Retrieve data lineage for an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/data/lineage",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Retrieves the data lineage information for an app."
+        },
+        {
+          "info": {
+            "name": "Retrieve script history",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/scripts",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Retrieves the script version history for an app."
+        },
+        {
+          "info": {
+            "name": "Set script for an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/scripts",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sets the load script content for an app."
+        },
+        {
+          "info": {
+            "name": "Retrieve script log metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/reloads/logs",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              }
+            ]
+          },
+          "docs": "Retrieves metadata about available reload script logs for an app."
+        },
+        {
+          "info": {
+            "name": "Retrieve a specific reload log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/apps/:appId/reloads/logs/:reloadId",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the app."
+              },
+              {
+                "name": "reloadId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reload."
+              }
+            ]
+          },
+          "docs": "Retrieves the log content for a specific reload of an app."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Spaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by action the user has access to."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of spaces to return."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by space name."
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for next page of results."
+              },
+              {
+                "name": "ownerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by owner identifier."
+              },
+              {
+                "name": "prev",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for previous page of results."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field and order."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by space type."
+              }
+            ]
+          },
+          "docs": "Retrieves spaces that the current user has access to. Supports filtering by type, name, and owner."
+        },
+        {
+          "info": {
+            "name": "Create a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new shared, managed, or data space."
+        },
+        {
+          "info": {
+            "name": "Retrieve a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific space by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties of a specific space."
+        },
+        {
+          "info": {
+            "name": "Patch space properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific properties of a space using JSON Patch operations on /name, /ownerId, and /description."
+        },
+        {
+          "info": {
+            "name": "Delete a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ]
+          },
+          "docs": "Deletes a specific space by its identifier."
+        },
+        {
+          "info": {
+            "name": "List space assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ]
+          },
+          "docs": "Retrieves all user and group role assignments for a specific space."
+        },
+        {
+          "info": {
+            "name": "Assign user or group to space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new role assignment for a user or group in a space."
+        },
+        {
+          "info": {
+            "name": "Retrieve a space assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments/:assignmentId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              },
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space assignment."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific assignment by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a space assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments/:assignmentId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              },
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space assignment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the role for an existing space assignment."
+        },
+        {
+          "info": {
+            "name": "Delete a space assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments/:assignmentId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              },
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space assignment."
+              }
+            ]
+          },
+          "docs": "Removes a user or group assignment from the space."
+        },
+        {
+          "info": {
+            "name": "List space types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/types"
+          },
+          "docs": "Retrieves the available space types for the tenant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List reloads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of the app to list reloads for."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM filter expression for advanced filtering of reload records."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of reload records to return."
+              },
+              {
+                "name": "log",
+                "value": "",
+                "type": "query",
+                "description": "When true, includes the script log in the response."
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for the next page of results."
+              },
+              {
+                "name": "prev",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for the previous page of results."
+              },
+              {
+                "name": "partial",
+                "value": "",
+                "type": "query",
+                "description": "When true, returns partial reload information."
+              }
+            ]
+          },
+          "docs": "Finds and returns reload records for a specific app. The appId query parameter is required."
+        },
+        {
+          "info": {
+            "name": "Reload an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a reload of an app to refresh its data from connected sources. Rate limited to 50 requests per minute."
+        },
+        {
+          "info": {
+            "name": "Retrieve a reload record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads/:reloadId",
+            "params": [
+              {
+                "name": "reloadId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reload."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific reload record by its identifier."
+        },
+        {
+          "info": {
+            "name": "Cancel a reload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads/:reloadId/actions/cancel",
+            "params": [
+              {
+                "name": "reloadId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reload."
+              }
+            ]
+          },
+          "docs": "Cancels a queued or in-progress reload. Rate limited to 50 requests per minute."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

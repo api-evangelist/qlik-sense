@@ -124,7 +124,7 @@ common:
     url: https://status.qlikcloud.com
   - type: Blog
     url: https://www.qlik.com/blog
-  - type: SignUp
+  - type: Signup
     url: https://www.qlik.com/us/trial/qlik-cloud-analytics
   - type: Login
     url: https://myqlik.qlik.com

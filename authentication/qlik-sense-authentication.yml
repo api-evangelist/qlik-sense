@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/qlik-sense-cloud-rest-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: OAuth 2.0 bearer token obtained from the Qlik Cloud tenant. Use the /oauth/token
+    endpoint or interactive login to obtain a token.
+  sources:
+  - openapi/qlik-sense-cloud-rest-api-openapi.yml
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: API key generated from the Qlik Cloud Management Console. Passed in the Authorization
+    header as Bearer <api-key>.
+  sources:
+  - openapi/qlik-sense-cloud-rest-api-openapi.yml

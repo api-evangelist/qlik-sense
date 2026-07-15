@@ -100,6 +100,8 @@ apis:
       - type: Tutorials
         url: https://qlik.dev/tutorials/embed-analytics
 common:
+  - type: AgenticAccess
+    url: agentic-access/qlik-sense-agentic-access.yml
   - type: DomainSecurity
     url: security/qlik-sense-domain-security.yml
   - type: Authentication

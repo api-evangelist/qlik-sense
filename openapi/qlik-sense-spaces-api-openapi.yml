@@ -1,0 +1,706 @@
+openapi: 3.1.0
+info:
+  title: Qlik Cloud REST Apps Spaces API
+  description: REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.
+  version: 1.0.0
+  contact:
+    name: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+  license:
+    name: Qlik Terms of Use
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-logo:
+    url: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+servers:
+- url: https://{tenant}.{region}.qlikcloud.com/api/v1
+  description: Qlik Cloud tenant
+  variables:
+    tenant:
+      default: your-tenant
+      description: The name of your Qlik Cloud tenant
+    region:
+      default: us
+      description: The region of your Qlik Cloud deployment
+      enum:
+      - us
+      - eu
+      - ap
+      - uk
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Spaces
+  description: Manage spaces, which are logical containers within a tenant that control access for users and groups through role-based assignments.
+  externalDocs:
+    url: https://qlik.dev/apis/rest/spaces
+paths:
+  /spaces:
+    get:
+      operationId: listSpaces
+      summary: List spaces
+      description: Retrieves spaces that the current user has access to. Supports filtering by type, name, and owner.
+      tags:
+      - Spaces
+      parameters:
+      - name: action
+        in: query
+        description: Filter by action the user has access to.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of spaces to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 10
+      - name: name
+        in: query
+        description: Filter by space name.
+        schema:
+          type: string
+      - name: next
+        in: query
+        description: Cursor for next page of results.
+        schema:
+          type: string
+      - name: ownerId
+        in: query
+        description: Filter by owner identifier.
+        schema:
+          type: string
+      - name: prev
+        in: query
+        description: Cursor for previous page of results.
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: Sort field and order.
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter by space type.
+        schema:
+          type: string
+          enum:
+          - shared
+          - managed
+          - data
+      responses:
+        '200':
+          description: Spaces returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createSpace
+      summary: Create a space
+      description: Creates a new shared, managed, or data space.
+      tags:
+      - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceCreate'
+      responses:
+        '201':
+          description: Space created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '409':
+          description: Conflict. A space with this name already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /spaces/{spaceId}:
+    parameters:
+    - $ref: '#/components/parameters/SpaceId'
+    get:
+      operationId: getSpace
+      summary: Retrieve a space
+      description: Retrieves a specific space by its identifier.
+      tags:
+      - Spaces
+      responses:
+        '200':
+          description: Space returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updateSpace
+      summary: Update a space
+      description: Updates the properties of a specific space.
+      tags:
+      - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceUpdate'
+      responses:
+        '200':
+          description: Space updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: patchSpace
+      summary: Patch space properties
+      description: Updates specific properties of a space using JSON Patch operations on /name, /ownerId, and /description.
+      tags:
+      - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatch'
+      responses:
+        '200':
+          description: Space patched successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Space'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteSpace
+      summary: Delete a space
+      description: Deletes a specific space by its identifier.
+      tags:
+      - Spaces
+      responses:
+        '204':
+          description: Space deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /spaces/{spaceId}/assignments:
+    parameters:
+    - $ref: '#/components/parameters/SpaceId'
+    get:
+      operationId: listSpaceAssignments
+      summary: List space assignments
+      description: Retrieves all user and group role assignments for a specific space.
+      tags:
+      - Spaces
+      responses:
+        '200':
+          description: Assignments returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignmentList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: createSpaceAssignment
+      summary: Assign user or group to space
+      description: Creates a new role assignment for a user or group in a space.
+      tags:
+      - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SpaceAssignmentCreate'
+      responses:
+        '201':
+          description: Assignment created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /spaces/{spaceId}/assignments/{assignmentId}:
+    parameters:
+    - $ref: '#/components/parameters/SpaceId'
+    - $ref: '#/components/parameters/AssignmentId'
+    get:
+      operationId: getSpaceAssignment
+      summary: Retrieve a space assignment
+      description: Retrieves a specific assignment by its identifier.
+      tags:
+      - Spaces
+      responses:
+        '200':
+          description: Assignment returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      operationId: updateSpaceAssignment
+      summary: Update a space assignment
+      description: Updates the role for an existing space assignment.
+      tags:
+      - Spaces
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - role
+              properties:
+                role:
+                  type: string
+                  description: The new role for the assignment.
+                  enum:
+                  - consumer
+                  - contributor
+                  - dataconsumer
+                  - facilitator
+                  - manager
+                  - operator
+                  - producer
+                  - publisher
+                  - basicconsumer
+      responses:
+        '200':
+          description: Assignment updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpaceAssignment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      operationId: deleteSpaceAssignment
+      summary: Delete a space assignment
+      description: Removes a user or group assignment from the space.
+      tags:
+      - Spaces
+      responses:
+        '204':
+          description: Assignment deleted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /spaces/types:
+    get:
+      operationId: listSpaceTypes
+      summary: List space types
+      description: Retrieves the available space types for the tenant.
+      tags:
+      - Spaces
+      responses:
+        '200':
+          description: Space types returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: The space type name.
+                        description:
+                          type: string
+                          description: Description of the space type.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  schemas:
+    SpaceList:
+      type: object
+      description: Paginated list of spaces.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Space'
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+            prev:
+              type: object
+              properties:
+                href:
+                  type: string
+    SpaceUpdate:
+      type: object
+      description: Payload to update an existing space.
+      properties:
+        name:
+          type: string
+          description: The updated name for the space.
+        ownerId:
+          type: string
+          description: The identifier of the new owner.
+        description:
+          type: string
+          description: The updated description.
+    SpaceCreate:
+      type: object
+      description: Payload to create a new space.
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: The name of the space.
+        type:
+          type: string
+          description: The type of space to create.
+          enum:
+          - shared
+          - managed
+          - data
+        description:
+          type: string
+          description: The description of the space.
+    Space:
+      type: object
+      description: Represents a space in Qlik Cloud.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the space.
+        name:
+          type: string
+          description: The name of the space.
+        type:
+          type: string
+          description: The type of the space.
+          enum:
+          - shared
+          - managed
+          - data
+        description:
+          type: string
+          description: The description of the space.
+        ownerId:
+          type: string
+          description: The identifier of the space owner.
+        tenantId:
+          type: string
+          description: The identifier of the tenant the space belongs to.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the space was created.
+        createdBy:
+          type: string
+          description: The identifier of the user who created the space.
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the space was last updated.
+        meta:
+          type: object
+          description: Metadata about the space.
+          properties:
+            roles:
+              type: array
+              items:
+                type: string
+              description: The roles the current user has on this space.
+            actions:
+              type: array
+              items:
+                type: string
+              description: The actions the current user can perform on this space.
+            assignableRoles:
+              type: array
+              items:
+                type: string
+              description: Roles that can be assigned in this space.
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            assignments:
+              type: object
+              properties:
+                href:
+                  type: string
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The error code.
+              title:
+                type: string
+                description: A short summary of the error.
+              detail:
+                type: string
+                description: A detailed error message.
+              status:
+                type: string
+                description: The HTTP status code as a string.
+              meta:
+                type: object
+                description: Additional error metadata.
+                additionalProperties: true
+    SpaceAssignmentList:
+      type: object
+      description: List of space assignments.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpaceAssignment'
+    JsonPatch:
+      type: object
+      description: A JSON Patch operation per RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The patch operation.
+          enum:
+          - add
+          - remove
+          - replace
+        path:
+          type: string
+          description: The JSON pointer to the target field.
+        value:
+          description: The value for the operation.
+    SpaceAssignment:
+      type: object
+      description: A role assignment for a user or group within a space.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the assignment.
+        type:
+          type: string
+          description: The type of assignee.
+          enum:
+          - user
+          - group
+        assigneeId:
+          type: string
+          description: The identifier of the assignee (user or group).
+        roles:
+          type: array
+          items:
+            type: string
+          description: The roles assigned.
+        spaceId:
+          type: string
+          description: The space this assignment belongs to.
+        tenantId:
+          type: string
+          description: The tenant identifier.
+        createdAt:
+          type: string
+          format: date-time
+          description: When the assignment was created.
+        createdBy:
+          type: string
+          description: Who created the assignment.
+        updatedAt:
+          type: string
+          format: date-time
+          description: When the assignment was last updated.
+    SpaceAssignmentCreate:
+      type: object
+      description: Payload to create a space role assignment.
+      required:
+      - type
+      - assigneeId
+      - roles
+      properties:
+        type:
+          type: string
+          description: The type of assignee.
+          enum:
+          - user
+          - group
+        assigneeId:
+          type: string
+          description: The identifier of the user or group.
+        roles:
+          type: array
+          items:
+            type: string
+            enum:
+            - consumer
+            - contributor
+            - dataconsumer
+            - facilitator
+            - manager
+            - operator
+            - producer
+            - publisher
+            - basicconsumer
+          description: The roles to assign.
+  responses:
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: Internal server error. An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    AssignmentId:
+      name: assignmentId
+      in: path
+      required: true
+      description: The unique identifier of the space assignment.
+      schema:
+        type: string
+    SpaceId:
+      name: spaceId
+      in: path
+      required: true
+      description: The unique identifier of the space.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from the Qlik Cloud tenant. Use the /oauth/token endpoint or interactive login to obtain a token.
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key generated from the Qlik Cloud Management Console. Passed in the Authorization header as Bearer <api-key>.
+externalDocs:
+  description: Qlik Cloud REST API documentation
+  url: https://qlik.dev/apis/rest

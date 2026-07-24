@@ -1,0 +1,392 @@
+openapi: 3.1.0
+info:
+  title: Qlik Cloud REST Apps Reloads API
+  description: REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.
+  version: 1.0.0
+  contact:
+    name: Qlik Developer Relations
+    email: developer@qlik.com
+    url: https://qlik.dev
+  license:
+    name: Qlik Terms of Use
+    url: https://www.qlik.com/us/legal/terms-of-use
+  x-logo:
+    url: https://www.qlik.com/us/-/media/images/qlik/global/qlik-logo.png
+servers:
+- url: https://{tenant}.{region}.qlikcloud.com/api/v1
+  description: Qlik Cloud tenant
+  variables:
+    tenant:
+      default: your-tenant
+      description: The name of your Qlik Cloud tenant
+    region:
+      default: us
+      description: The region of your Qlik Cloud deployment
+      enum:
+      - us
+      - eu
+      - ap
+      - uk
+security:
+- bearerAuth: []
+- apiKey: []
+tags:
+- name: Reloads
+  description: Trigger and manage data reloads for apps to refresh data from connected sources.
+  externalDocs:
+    url: https://qlik.dev/apis/rest/reloads
+paths:
+  /reloads:
+    get:
+      operationId: listReloads
+      summary: List reloads
+      description: Finds and returns reload records for a specific app. The appId query parameter is required.
+      tags:
+      - Reloads
+      parameters:
+      - name: appId
+        in: query
+        required: true
+        description: The identifier of the app to list reloads for.
+        schema:
+          type: string
+          format: uuid
+      - name: filter
+        in: query
+        description: SCIM filter expression for advanced filtering of reload records.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of reload records to return.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 10
+      - name: log
+        in: query
+        description: When true, includes the script log in the response.
+        schema:
+          type: boolean
+          default: false
+      - name: next
+        in: query
+        description: Cursor for the next page of results.
+        schema:
+          type: string
+      - name: prev
+        in: query
+        description: Cursor for the previous page of results.
+        schema:
+          type: string
+      - name: partial
+        in: query
+        description: When true, returns partial reload information.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Reload records returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReloadList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: reloadApp
+      summary: Reload an app
+      description: Triggers a reload of an app to refresh its data from connected sources. Rate limited to 50 requests per minute.
+      tags:
+      - Reloads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReloadCreate'
+      responses:
+        '201':
+          description: Reload initiated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reload'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '429':
+          description: Too many requests. Rate limit exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /reloads/{reloadId}:
+    parameters:
+    - $ref: '#/components/parameters/ReloadId'
+    get:
+      operationId: getReload
+      summary: Retrieve a reload record
+      description: Retrieves a specific reload record by its identifier.
+      tags:
+      - Reloads
+      responses:
+        '200':
+          description: Reload record returned successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reload'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /reloads/{reloadId}/actions/cancel:
+    parameters:
+    - $ref: '#/components/parameters/ReloadId'
+    post:
+      operationId: cancelReload
+      summary: Cancel a reload
+      description: Cancels a queued or in-progress reload. Rate limited to 50 requests per minute.
+      tags:
+      - Reloads
+      responses:
+        '202':
+          description: Cancel request accepted.
+        '204':
+          description: Reload already completed or cancelled.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '409':
+          description: Conflict. The reload is in a state that cannot be cancelled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    InternalServerError:
+      description: Internal server error. An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The error code.
+              title:
+                type: string
+                description: A short summary of the error.
+              detail:
+                type: string
+                description: A detailed error message.
+              status:
+                type: string
+                description: The HTTP status code as a string.
+              meta:
+                type: object
+                description: Additional error metadata.
+                additionalProperties: true
+    ReloadList:
+      type: object
+      description: Paginated list of reloads.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reload'
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+            prev:
+              type: object
+              properties:
+                href:
+                  type: string
+    ReloadCreate:
+      type: object
+      description: Payload to trigger an app reload.
+      required:
+      - appId
+      properties:
+        appId:
+          type: string
+          description: The identifier of the app to reload.
+        partial:
+          type: boolean
+          description: When true, performs a partial reload which adds data to the existing data model without removing previous data.
+          default: false
+        variables:
+          type: array
+          description: Variables to pass into the reload script. Maximum of 20 variables, each with a maximum name and value length of 256 characters.
+          maxItems: 20
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The variable name.
+                maxLength: 256
+              value:
+                type: string
+                description: The variable value.
+                maxLength: 256
+    Reload:
+      type: object
+      description: Represents a reload record in Qlik Cloud.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the reload.
+        appId:
+          type: string
+          description: The identifier of the app that was reloaded.
+        tenantId:
+          type: string
+          description: The tenant identifier.
+        userId:
+          type: string
+          description: The identifier of the user who triggered the reload.
+        type:
+          type: string
+          description: The type of reload.
+          enum:
+          - hub
+          - external
+          - chronos
+          - automations
+        status:
+          type: string
+          description: The current status of the reload.
+          enum:
+          - QUEUED
+          - RELOADING
+          - CANCELING
+          - SUCCEEDED
+          - FAILED
+          - CANCELED
+          - EXCEEDED_LIMIT
+        partial:
+          type: boolean
+          description: Whether this was a partial reload.
+        log:
+          type: string
+          description: The script log content when requested.
+        creationTime:
+          type: string
+          format: date-time
+          description: When the reload was created.
+        startTime:
+          type: string
+          format: date-time
+          description: When the reload started executing.
+        endTime:
+          type: string
+          format: date-time
+          description: When the reload finished.
+        duration:
+          type: string
+          description: The duration of the reload in ISO 8601 format.
+        engineTime:
+          type: string
+          description: The engine processing time.
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+  parameters:
+    ReloadId:
+      name: reloadId
+      in: path
+      required: true
+      description: The unique identifier of the reload.
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: OAuth 2.0 bearer token obtained from the Qlik Cloud tenant. Use the /oauth/token endpoint or interactive login to obtain a token.
+    apiKey:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key generated from the Qlik Cloud Management Console. Passed in the Authorization header as Bearer <api-key>.
+externalDocs:
+  description: Qlik Cloud REST API documentation
+  url: https://qlik.dev/apis/rest

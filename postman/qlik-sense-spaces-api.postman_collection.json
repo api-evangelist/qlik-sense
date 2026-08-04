@@ -1,0 +1,3777 @@
+{
+  "info": {
+    "_postman_id": "24b570f3-255f-453c-886b-0377c1db0d36",
+    "name": "Qlik Cloud REST Apps Spaces API",
+    "description": "REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.\n\nContact Support:\n Name: Qlik Developer Relations\n Email: developer@qlik.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:54.000Z",
+    "updatedAt": "2026-07-28T02:41:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-24b570f3-255f-453c-886b-0377c1db0d36"
+  },
+  "item": [
+    {
+      "name": "spaces",
+      "item": [
+        {
+          "name": "{spaceId}",
+          "item": [
+            {
+              "name": "assignments",
+              "item": [
+                {
+                  "name": "{assignmentId}",
+                  "item": [
+                    {
+                      "name": "Retrieve a space assignment",
+                      "id": "b8f5cf21-e7a1-48f4-acde-f24778759e21",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments",
+                            ":assignmentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c12a604d-b864-482b-8af8-99d57dc3a930",
+                              "key": "spaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the space."
+                            },
+                            {
+                              "id": "8975782c-e16c-4646-a943-03ad740eb107",
+                              "key": "assignmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the space assignment."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a specific assignment by its identifier."
+                      },
+                      "response": [
+                        {
+                          "id": "bd081d72-eb0e-4d4a-b4e7-faecb3e193ed",
+                          "name": "Assignment returned successfully.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spaceId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-bd081d72-eb0e-4d4a-b4e7-faecb3e193ed"
+                        },
+                        {
+                          "id": "c34835c3-8dad-42c8-81e1-007b330da7fb",
+                          "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-c34835c3-8dad-42c8-81e1-007b330da7fb"
+                        },
+                        {
+                          "id": "621a6f5c-d13c-4c4e-8b6a-fd3fbaedc15f",
+                          "name": "Not found. The requested resource does not exist.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-621a6f5c-d13c-4c4e-8b6a-fd3fbaedc15f"
+                        },
+                        {
+                          "id": "30efc879-f414-4d07-b1d7-bd7f127b9445",
+                          "name": "Internal server error. An unexpected error occurred.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-30efc879-f414-4d07-b1d7-bd7f127b9445"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-b8f5cf21-e7a1-48f4-acde-f24778759e21"
+                    },
+                    {
+                      "name": "Update a space assignment",
+                      "id": "b6e8351b-3811-44d6-b387-aa0aa725f874",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"role\": \"facilitator\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments",
+                            ":assignmentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "c7bb719d-dee0-49c7-a4f5-6d6538fe09db",
+                              "key": "spaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the space."
+                            },
+                            {
+                              "id": "3d9880fe-ab20-4112-a893-1d5269e867a3",
+                              "key": "assignmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the space assignment."
+                            }
+                          ]
+                        },
+                        "description": "Updates the role for an existing space assignment."
+                      },
+                      "response": [
+                        {
+                          "id": "4bfea466-d710-4a72-b4d6-dcfeb8183a9d",
+                          "name": "Assignment updated successfully.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": \"facilitator\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spaceId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-4bfea466-d710-4a72-b4d6-dcfeb8183a9d"
+                        },
+                        {
+                          "id": "a5955ceb-63e6-4357-abeb-e8f18fd8db65",
+                          "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": \"facilitator\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-a5955ceb-63e6-4357-abeb-e8f18fd8db65"
+                        },
+                        {
+                          "id": "6ecce4c4-bac5-4d00-8b0d-d8d2bd3f77ac",
+                          "name": "Forbidden. The user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": \"facilitator\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-6ecce4c4-bac5-4d00-8b0d-d8d2bd3f77ac"
+                        },
+                        {
+                          "id": "5b981d6f-b81c-453d-ab10-98d0e0d59f1b",
+                          "name": "Not found. The requested resource does not exist.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": \"facilitator\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-5b981d6f-b81c-453d-ab10-98d0e0d59f1b"
+                        },
+                        {
+                          "id": "072c31b3-751e-4a84-bd17-7a4cd5c34bd4",
+                          "name": "Internal server error. An unexpected error occurred.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"role\": \"facilitator\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-072c31b3-751e-4a84-bd17-7a4cd5c34bd4"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-b6e8351b-3811-44d6-b387-aa0aa725f874"
+                    },
+                    {
+                      "name": "Delete a space assignment",
+                      "id": "26ca85e9-dee7-494c-b7de-ef8abd953df2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments",
+                            ":assignmentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f3251701-3937-42f6-8894-017d43058c2f",
+                              "key": "spaceId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the space."
+                            },
+                            {
+                              "id": "b400892a-b918-4182-b49e-1f254f79ccdd",
+                              "key": "assignmentId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the space assignment."
+                            }
+                          ]
+                        },
+                        "description": "Removes a user or group assignment from the space."
+                      },
+                      "response": [
+                        {
+                          "id": "b663c414-3455-4263-aa7e-131d20d551c5",
+                          "name": "Assignment deleted successfully.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-b663c414-3455-4263-aa7e-131d20d551c5"
+                        },
+                        {
+                          "id": "740c0908-a154-4eae-9afa-81c8bc9f5965",
+                          "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-740c0908-a154-4eae-9afa-81c8bc9f5965"
+                        },
+                        {
+                          "id": "9b50c61c-a938-483a-982b-1c619299bbf3",
+                          "name": "Forbidden. The user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-9b50c61c-a938-483a-982b-1c619299bbf3"
+                        },
+                        {
+                          "id": "4f1d6c83-cfbf-493a-a139-965476ab86d7",
+                          "name": "Not found. The requested resource does not exist.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-4f1d6c83-cfbf-493a-a139-965476ab86d7"
+                        },
+                        {
+                          "id": "ffd83298-c254-43ce-935d-2c3ee50c8f86",
+                          "name": "Internal server error. An unexpected error occurred.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/spaces/:spaceId/assignments/:assignmentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "spaces",
+                                ":spaceId",
+                                "assignments",
+                                ":assignmentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "spaceId"
+                                },
+                                {
+                                  "key": "assignmentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:55.000Z",
+                          "updatedAt": "2026-07-28T02:41:55.000Z",
+                          "uid": "35240-ffd83298-c254-43ce-935d-2c3ee50c8f86"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-26ca85e9-dee7-494c-b7de-ef8abd953df2"
+                    }
+                  ],
+                  "id": "d5be2c5a-cdec-4038-b4dc-8633b387f298",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-d5be2c5a-cdec-4038-b4dc-8633b387f298"
+                },
+                {
+                  "name": "List space assignments",
+                  "id": "ec4369af-a959-48e8-9029-0d091fe23b53",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId",
+                        "assignments"
+                      ],
+                      "variable": [
+                        {
+                          "id": "43c116c5-5cfd-4233-8f60-fd33583544a1",
+                          "key": "spaceId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the space."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves all user and group role assignments for a specific space."
+                  },
+                  "response": [
+                    {
+                      "id": "d0d584f6-8d2d-4f88-9277-fe1a97e3c4e6",
+                      "name": "Assignments returned successfully.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"type\": \"user\",\n      \"assigneeId\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"spaceId\": \"<string>\",\n      \"tenantId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"type\": \"user\",\n      \"assigneeId\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"spaceId\": \"<string>\",\n      \"tenantId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-d0d584f6-8d2d-4f88-9277-fe1a97e3c4e6"
+                    },
+                    {
+                      "id": "e73021ab-c3fb-4962-9876-a3b413030d03",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-e73021ab-c3fb-4962-9876-a3b413030d03"
+                    },
+                    {
+                      "id": "08900fab-cf52-4bfa-8576-a3866b1b5bb4",
+                      "name": "Not found. The requested resource does not exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-08900fab-cf52-4bfa-8576-a3866b1b5bb4"
+                    },
+                    {
+                      "id": "09de7781-47fb-42a2-bb35-5e9be320d2eb",
+                      "name": "Internal server error. An unexpected error occurred.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-09de7781-47fb-42a2-bb35-5e9be320d2eb"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-ec4369af-a959-48e8-9029-0d091fe23b53"
+                },
+                {
+                  "name": "Assign user or group to space",
+                  "id": "8fce608c-907b-4a58-b13a-8a9bdd6b1632",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"facilitator\",\n    \"publisher\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId",
+                        "assignments"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ab8c817c-ed9e-41e3-976d-e4ec67d5a193",
+                          "key": "spaceId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the space."
+                        }
+                      ]
+                    },
+                    "description": "Creates a new role assignment for a user or group in a space."
+                  },
+                  "response": [
+                    {
+                      "id": "4493db41-417f-4602-87d8-dea623a5a797",
+                      "name": "Assignment created successfully.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"facilitator\",\n    \"publisher\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"spaceId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-4493db41-417f-4602-87d8-dea623a5a797"
+                    },
+                    {
+                      "id": "2ca13be0-7cbf-422b-bcfa-db2d85631a83",
+                      "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"facilitator\",\n    \"publisher\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-2ca13be0-7cbf-422b-bcfa-db2d85631a83"
+                    },
+                    {
+                      "id": "6210f8b8-9169-41b8-8410-4326cc74a9de",
+                      "name": "Forbidden. The user does not have permission for this operation.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"facilitator\",\n    \"publisher\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-6210f8b8-9169-41b8-8410-4326cc74a9de"
+                    },
+                    {
+                      "id": "55fccc2b-9057-4aa9-838f-8cc906b76d4d",
+                      "name": "Not found. The requested resource does not exist.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"facilitator\",\n    \"publisher\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-55fccc2b-9057-4aa9-838f-8cc906b76d4d"
+                    },
+                    {
+                      "id": "c0d43142-c73f-43c5-baa0-9ccca4e3deef",
+                      "name": "Internal server error. An unexpected error occurred.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"type\": \"user\",\n  \"assigneeId\": \"<string>\",\n  \"roles\": [\n    \"facilitator\",\n    \"publisher\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/spaces/:spaceId/assignments",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "spaces",
+                            ":spaceId",
+                            "assignments"
+                          ],
+                          "variable": [
+                            {
+                              "key": "spaceId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T02:41:55.000Z",
+                      "updatedAt": "2026-07-28T02:41:55.000Z",
+                      "uid": "35240-c0d43142-c73f-43c5-baa0-9ccca4e3deef"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-8fce608c-907b-4a58-b13a-8a9bdd6b1632"
+                }
+              ],
+              "id": "14f36770-6ab7-4b8f-a822-e7bd4aa5f115",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-14f36770-6ab7-4b8f-a822-e7bd4aa5f115"
+            },
+            {
+              "name": "Retrieve a space",
+              "id": "6f023685-c77d-4342-9e0c-693d152b50a4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces/:spaceId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "52352a60-0994-4ffd-ab68-00975e10a6fa",
+                      "key": "spaceId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the space."
+                    }
+                  ]
+                },
+                "description": "Retrieves a specific space by its identifier."
+              },
+              "response": [
+                {
+                  "id": "6ebf1d4c-71a6-47db-a993-35c839bbafe9",
+                  "name": "Space returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"shared\",\n  \"description\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"meta\": {\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"actions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"assignableRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"assignments\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-6ebf1d4c-71a6-47db-a993-35c839bbafe9"
+                },
+                {
+                  "id": "c3e3d5b2-789e-41f1-8714-c4eea734b82c",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-c3e3d5b2-789e-41f1-8714-c4eea734b82c"
+                },
+                {
+                  "id": "9f0b5643-caba-440f-8d26-562e6bf265e4",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-9f0b5643-caba-440f-8d26-562e6bf265e4"
+                },
+                {
+                  "id": "aa66062f-c614-4620-b33d-05e4fe1e4e75",
+                  "name": "Internal server error. An unexpected error occurred.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-aa66062f-c614-4620-b33d-05e4fe1e4e75"
+                }
+              ],
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-6f023685-c77d-4342-9e0c-693d152b50a4"
+            },
+            {
+              "name": "Update a space",
+              "id": "bc4b01bc-4da2-45cd-b903-f8e7dbf732f1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces/:spaceId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "229a2e05-2e43-4094-86c4-ce5cddfe19e5",
+                      "key": "spaceId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the space."
+                    }
+                  ]
+                },
+                "description": "Updates the properties of a specific space."
+              },
+              "response": [
+                {
+                  "id": "09e57b4b-2278-4ddb-9726-484b5170ad4b",
+                  "name": "Space updated successfully.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"shared\",\n  \"description\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"meta\": {\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"actions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"assignableRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"assignments\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-09e57b4b-2278-4ddb-9726-484b5170ad4b"
+                },
+                {
+                  "id": "a99998e6-cba0-4f58-aa24-f7cef7d8e00d",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-a99998e6-cba0-4f58-aa24-f7cef7d8e00d"
+                },
+                {
+                  "id": "614e0c32-4ad5-478f-b26c-5ce17d87646a",
+                  "name": "Forbidden. The user does not have permission for this operation.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-614e0c32-4ad5-478f-b26c-5ce17d87646a"
+                },
+                {
+                  "id": "75e96aee-04ce-4ad7-aa0c-d2a170491b90",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-75e96aee-04ce-4ad7-aa0c-d2a170491b90"
+                },
+                {
+                  "id": "82053609-aef6-4b9e-bc4f-5ca3642e18ef",
+                  "name": "Internal server error. An unexpected error occurred.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-82053609-aef6-4b9e-bc4f-5ca3642e18ef"
+                }
+              ],
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-bc4b01bc-4da2-45cd-b903-f8e7dbf732f1"
+            },
+            {
+              "name": "Patch space properties",
+              "id": "c6b9d41c-c89e-4786-8823-a5b403ee5582",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces/:spaceId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a367c482-6325-4c54-8181-c0877c083d2b",
+                      "key": "spaceId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the space."
+                    }
+                  ]
+                },
+                "description": "Updates specific properties of a space using JSON Patch operations on /name, /ownerId, and /description."
+              },
+              "response": [
+                {
+                  "id": "2b12f16b-3e4f-48cd-bbc1-ac0da2bc0df3",
+                  "name": "Space patched successfully.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"shared\",\n  \"description\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"meta\": {\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"actions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"assignableRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"assignments\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-2b12f16b-3e4f-48cd-bbc1-ac0da2bc0df3"
+                },
+                {
+                  "id": "a550f8a9-5bcf-4b36-bc1f-6fb186d3ba00",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-a550f8a9-5bcf-4b36-bc1f-6fb186d3ba00"
+                },
+                {
+                  "id": "ec9abb0b-5915-4fe6-b8d1-738ea950f081",
+                  "name": "Forbidden. The user does not have permission for this operation.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-ec9abb0b-5915-4fe6-b8d1-738ea950f081"
+                },
+                {
+                  "id": "7e96fda5-5d3d-42b2-ab57-bd100e1dc040",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-7e96fda5-5d3d-42b2-ab57-bd100e1dc040"
+                },
+                {
+                  "id": "e41e6114-2929-41b9-9642-5fd3ff1080d6",
+                  "name": "Internal server error. An unexpected error occurred.",
+                  "originalRequest": {
+                    "method": "PATCH",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"op\": \"add\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  },\n  {\n    \"op\": \"remove\",\n    \"path\": \"<string>\",\n    \"value\": {\n      \"description\": \"The value for the operation.\"\n    }\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-e41e6114-2929-41b9-9642-5fd3ff1080d6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-c6b9d41c-c89e-4786-8823-a5b403ee5582"
+            },
+            {
+              "name": "Delete a space",
+              "id": "2564910e-1bf5-4d01-9c7c-0688ecc9ce82",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces/:spaceId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces",
+                    ":spaceId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d2abfa4c-4432-4b46-930f-ec64e1b639c8",
+                      "key": "spaceId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the space."
+                    }
+                  ]
+                },
+                "description": "Deletes a specific space by its identifier."
+              },
+              "response": [
+                {
+                  "id": "c842f5f3-9b98-410f-95c1-851cba136daa",
+                  "name": "Space deleted successfully.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-c842f5f3-9b98-410f-95c1-851cba136daa"
+                },
+                {
+                  "id": "d93077eb-ad82-41c0-8b7d-d9fe5968a8a9",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-d93077eb-ad82-41c0-8b7d-d9fe5968a8a9"
+                },
+                {
+                  "id": "84dd9ac1-57e6-4e43-960c-40ee5b5d29a5",
+                  "name": "Forbidden. The user does not have permission for this operation.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-84dd9ac1-57e6-4e43-960c-40ee5b5d29a5"
+                },
+                {
+                  "id": "6e42d7db-3239-4c47-87a2-15eb69f7d949",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-6e42d7db-3239-4c47-87a2-15eb69f7d949"
+                },
+                {
+                  "id": "40ef3506-4dd6-416c-99a9-1d20c5b0a6f7",
+                  "name": "Internal server error. An unexpected error occurred.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/:spaceId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        ":spaceId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "spaceId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-40ef3506-4dd6-416c-99a9-1d20c5b0a6f7"
+                }
+              ],
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-2564910e-1bf5-4d01-9c7c-0688ecc9ce82"
+            }
+          ],
+          "id": "ccc9cfd7-54a7-4585-90f0-9ee61487e7e3",
+          "createdAt": "2026-07-28T02:41:55.000Z",
+          "updatedAt": "2026-07-28T02:41:55.000Z",
+          "uid": "35240-ccc9cfd7-54a7-4585-90f0-9ee61487e7e3"
+        },
+        {
+          "name": "types",
+          "item": [
+            {
+              "name": "List space types",
+              "id": "b78fe3f7-f173-4ca6-9cb4-f88e77004664",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces/types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces",
+                    "types"
+                  ]
+                },
+                "description": "Retrieves the available space types for the tenant."
+              },
+              "response": [
+                {
+                  "id": "f0d31733-e08f-4310-87a5-c85805c4b466",
+                  "name": "Space types returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-f0d31733-e08f-4310-87a5-c85805c4b466"
+                },
+                {
+                  "id": "a3f5a292-eb14-4823-9fd0-e5a2cf9f2818",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-a3f5a292-eb14-4823-9fd0-e5a2cf9f2818"
+                },
+                {
+                  "id": "358fa868-4cc6-4dd4-a250-76a879b7aa2f",
+                  "name": "Internal server error. An unexpected error occurred.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/spaces/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "spaces",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:55.000Z",
+                  "updatedAt": "2026-07-28T02:41:55.000Z",
+                  "uid": "35240-358fa868-4cc6-4dd4-a250-76a879b7aa2f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-b78fe3f7-f173-4ca6-9cb4-f88e77004664"
+            }
+          ],
+          "id": "5f058df0-c801-495d-ab41-dbf8e0cc5cb5",
+          "createdAt": "2026-07-28T02:41:55.000Z",
+          "updatedAt": "2026-07-28T02:41:55.000Z",
+          "uid": "35240-5f058df0-c801-495d-ab41-dbf8e0cc5cb5"
+        },
+        {
+          "name": "List spaces",
+          "id": "39731efe-3462-4b1e-9223-1227d464d7a1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/spaces?action=<string>&limit=10&name=<string>&next=<string>&ownerId=<string>&prev=<string>&sort=<string>&type=managed",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "spaces"
+              ],
+              "query": [
+                {
+                  "description": "Filter by action the user has access to.",
+                  "key": "action",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of spaces to return.",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Filter by space name.",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor for next page of results.",
+                  "key": "next",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by owner identifier.",
+                  "key": "ownerId",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor for previous page of results.",
+                  "key": "prev",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Sort field and order.",
+                  "key": "sort",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by space type.",
+                  "key": "type",
+                  "value": "managed"
+                }
+              ]
+            },
+            "description": "Retrieves spaces that the current user has access to. Supports filtering by type, name, and owner."
+          },
+          "response": [
+            {
+              "id": "7794bc8a-e9a1-4736-b642-cc4acb19b317",
+              "name": "Spaces returned successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces?action=<string>&limit=10&name=<string>&next=<string>&ownerId=<string>&prev=<string>&sort=<string>&type=managed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by action the user has access to.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of spaces to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by space name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by owner identifier.",
+                      "key": "ownerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort field and order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by space type.",
+                      "key": "type",
+                      "value": "managed"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"managed\",\n      \"description\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"tenantId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"meta\": {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"actions\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"assignableRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"links\": {\n        \"self\": {\n          \"href\": \"<string>\"\n        },\n        \"assignments\": {\n          \"href\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"managed\",\n      \"description\": \"<string>\",\n      \"ownerId\": \"<string>\",\n      \"tenantId\": \"<string>\",\n      \"createdAt\": \"<dateTime>\",\n      \"createdBy\": \"<string>\",\n      \"updatedAt\": \"<dateTime>\",\n      \"meta\": {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"actions\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"assignableRoles\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"links\": {\n        \"self\": {\n          \"href\": \"<string>\"\n        },\n        \"assignments\": {\n          \"href\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"prev\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-7794bc8a-e9a1-4736-b642-cc4acb19b317"
+            },
+            {
+              "id": "5be069d9-0e02-401e-a183-6e25ab117d89",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces?action=<string>&limit=10&name=<string>&next=<string>&ownerId=<string>&prev=<string>&sort=<string>&type=managed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by action the user has access to.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of spaces to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by space name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by owner identifier.",
+                      "key": "ownerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort field and order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by space type.",
+                      "key": "type",
+                      "value": "managed"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-5be069d9-0e02-401e-a183-6e25ab117d89"
+            },
+            {
+              "id": "7b56ba2b-9f38-440d-b88e-3e1d493946a5",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces?action=<string>&limit=10&name=<string>&next=<string>&ownerId=<string>&prev=<string>&sort=<string>&type=managed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by action the user has access to.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of spaces to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by space name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by owner identifier.",
+                      "key": "ownerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort field and order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by space type.",
+                      "key": "type",
+                      "value": "managed"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-7b56ba2b-9f38-440d-b88e-3e1d493946a5"
+            },
+            {
+              "id": "2d3803b7-44ef-43f8-9aaa-f80529cc2441",
+              "name": "Internal server error. An unexpected error occurred.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/spaces?action=<string>&limit=10&name=<string>&next=<string>&ownerId=<string>&prev=<string>&sort=<string>&type=managed",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter by action the user has access to.",
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of spaces to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Filter by space name.",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by owner identifier.",
+                      "key": "ownerId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Sort field and order.",
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by space type.",
+                      "key": "type",
+                      "value": "managed"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-2d3803b7-44ef-43f8-9aaa-f80529cc2441"
+            }
+          ],
+          "createdAt": "2026-07-28T02:41:55.000Z",
+          "updatedAt": "2026-07-28T02:41:55.000Z",
+          "uid": "35240-39731efe-3462-4b1e-9223-1227d464d7a1"
+        },
+        {
+          "name": "Create a space",
+          "id": "b31bcb52-8bdd-4c47-977f-1bb9a4391e45",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"managed\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/spaces",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "spaces"
+              ]
+            },
+            "description": "Creates a new shared, managed, or data space."
+          },
+          "response": [
+            {
+              "id": "361998db-1676-41d8-9129-676f72ae63f3",
+              "name": "Space created successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"managed\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"shared\",\n  \"description\": \"<string>\",\n  \"ownerId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"meta\": {\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"actions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"assignableRoles\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"assignments\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-361998db-1676-41d8-9129-676f72ae63f3"
+            },
+            {
+              "id": "dbaca14d-c443-4cb3-aa69-a6406d9557e0",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"managed\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-dbaca14d-c443-4cb3-aa69-a6406d9557e0"
+            },
+            {
+              "id": "82e37fc5-409c-49d0-8d01-8cdc3d2b5bea",
+              "name": "Forbidden. The user does not have permission for this operation.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"managed\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-82e37fc5-409c-49d0-8d01-8cdc3d2b5bea"
+            },
+            {
+              "id": "39c720dd-3c4c-4a78-a1f9-ff74c846ff47",
+              "name": "Conflict. A space with this name already exists.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"managed\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-39c720dd-3c4c-4a78-a1f9-ff74c846ff47"
+            },
+            {
+              "id": "d3d49801-41a6-4d7d-9f04-65c22dfd13f3",
+              "name": "Internal server error. An unexpected error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"managed\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/spaces",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "spaces"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"consectetur9b\": \"ullamco\",\n        \"laboris9e\": \"sit occaecat ullamco in\",\n        \"in3\": -27549011.696799263,\n        \"minim_8c4\": 38115844.382149965\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"aliquip_da\": \"consectetur occaecat\",\n        \"aute2_\": \"non dolor ut esse reprehenderit\",\n        \"laborum_ae\": false\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:55.000Z",
+              "updatedAt": "2026-07-28T02:41:55.000Z",
+              "uid": "35240-d3d49801-41a6-4d7d-9f04-65c22dfd13f3"
+            }
+          ],
+          "createdAt": "2026-07-28T02:41:55.000Z",
+          "updatedAt": "2026-07-28T02:41:55.000Z",
+          "uid": "35240-b31bcb52-8bdd-4c47-977f-1bb9a4391e45"
+        }
+      ],
+      "id": "d8328827-3320-437d-b728-e880465b21ae",
+      "createdAt": "2026-07-28T02:41:55.000Z",
+      "updatedAt": "2026-07-28T02:41:55.000Z",
+      "uid": "35240-d8328827-3320-437d-b728-e880465b21ae"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant",
+      "value": "your-tenant"
+    },
+    {
+      "key": "region",
+      "value": "us"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{tenant}}.{{region}}.qlikcloud.com/api/v1"
+    }
+  ]
+}

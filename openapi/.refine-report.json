@@ -1,0 +1,18 @@
+{
+  "provider": "qlik-sense",
+  "sources": [
+    "qlik-sense-apps-api-openapi.yml",
+    "qlik-sense-reloads-api-openapi.yml",
+    "qlik-sense-spaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "qlik-sense-apps-api-openapi.yml",
+    "qlik-sense-reloads-api-openapi.yml",
+    "qlik-sense-spaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

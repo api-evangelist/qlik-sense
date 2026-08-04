@@ -1,0 +1,1670 @@
+{
+  "info": {
+    "_postman_id": "db7acc7f-87b1-4cab-88aa-06fb20e9dcce",
+    "name": "Qlik Cloud REST Apps Reloads API",
+    "description": "REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.\n\nContact Support:\n Name: Qlik Developer Relations\n Email: developer@qlik.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:41:53.000Z",
+    "updatedAt": "2026-07-28T02:41:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-db7acc7f-87b1-4cab-88aa-06fb20e9dcce"
+  },
+  "item": [
+    {
+      "name": "reloads",
+      "item": [
+        {
+          "name": "{reloadId}",
+          "item": [
+            {
+              "name": "actions",
+              "item": [
+                {
+                  "name": "cancel",
+                  "item": [
+                    {
+                      "name": "Cancel a reload",
+                      "id": "0b7e8d67-80cd-42f6-aa04-6a1e99d7bbec",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reloads",
+                            ":reloadId",
+                            "actions",
+                            "cancel"
+                          ],
+                          "variable": [
+                            {
+                              "id": "76b65dcf-8476-4d05-a67c-8412a16d6050",
+                              "key": "reloadId",
+                              "value": "<string>",
+                              "description": "(Required) The unique identifier of the reload."
+                            }
+                          ]
+                        },
+                        "description": "Cancels a queued or in-progress reload. Rate limited to 50 requests per minute."
+                      },
+                      "response": [
+                        {
+                          "id": "e8ab9a56-8668-4d6d-8359-eb5a2c1374a5",
+                          "name": "Cancel request accepted.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-e8ab9a56-8668-4d6d-8359-eb5a2c1374a5"
+                        },
+                        {
+                          "id": "200464cd-be7d-466f-a6da-8ae8897c77a9",
+                          "name": "Reload already completed or cancelled.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-200464cd-be7d-466f-a6da-8ae8897c77a9"
+                        },
+                        {
+                          "id": "9c8fd5a3-3af5-4ee8-945c-55e7f99beee3",
+                          "name": "Bad request. The request body or parameters are invalid.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-9c8fd5a3-3af5-4ee8-945c-55e7f99beee3"
+                        },
+                        {
+                          "id": "89569795-335e-44b9-908d-dac55d90cec7",
+                          "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-89569795-335e-44b9-908d-dac55d90cec7"
+                        },
+                        {
+                          "id": "c80c7092-2636-43df-b78c-101127c3f4e6",
+                          "name": "Forbidden. The user does not have permission for this operation.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-c80c7092-2636-43df-b78c-101127c3f4e6"
+                        },
+                        {
+                          "id": "75e7b57b-68de-49d2-8236-f26c44dae403",
+                          "name": "Not found. The requested resource does not exist.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-75e7b57b-68de-49d2-8236-f26c44dae403"
+                        },
+                        {
+                          "id": "cfcd2eaa-eb33-4dda-897c-05e143f8f109",
+                          "name": "Conflict. The reload is in a state that cannot be cancelled.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Conflict",
+                          "code": 409,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-cfcd2eaa-eb33-4dda-897c-05e143f8f109"
+                        },
+                        {
+                          "id": "eb55d921-d983-4706-9c1d-1ad8ee3f887f",
+                          "name": "Internal server error. An unexpected error occurred.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reloads/:reloadId/actions/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reloads",
+                                ":reloadId",
+                                "actions",
+                                "cancel"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "reloadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T02:41:54.000Z",
+                          "updatedAt": "2026-07-28T02:41:54.000Z",
+                          "uid": "35240-eb55d921-d983-4706-9c1d-1ad8ee3f887f"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:41:54.000Z",
+                      "updatedAt": "2026-07-28T02:41:54.000Z",
+                      "uid": "35240-0b7e8d67-80cd-42f6-aa04-6a1e99d7bbec"
+                    }
+                  ],
+                  "id": "32bf2564-2ea5-4220-b02c-c31a7eaf1c43",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-32bf2564-2ea5-4220-b02c-c31a7eaf1c43"
+                }
+              ],
+              "id": "be251f95-479f-4573-bb7c-d315995e31f2",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-be251f95-479f-4573-bb7c-d315995e31f2"
+            },
+            {
+              "name": "Retrieve a reload record",
+              "id": "5164c18b-e8e1-4917-8e25-226b32c7d468",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reloads/:reloadId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads",
+                    ":reloadId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "252c7061-b044-47a9-a3f6-c33b7bd4e2c0",
+                      "key": "reloadId",
+                      "value": "<string>",
+                      "description": "(Required) The unique identifier of the reload."
+                    }
+                  ]
+                },
+                "description": "Retrieves a specific reload record by its identifier."
+              },
+              "response": [
+                {
+                  "id": "d402e757-d0ce-41c2-a889-b98364422cc4",
+                  "name": "Reload record returned successfully.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reloads/:reloadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reloads",
+                        ":reloadId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reloadId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"appId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"type\": \"hub\",\n  \"status\": \"QUEUED\",\n  \"partial\": \"<boolean>\",\n  \"log\": \"<string>\",\n  \"creationTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"duration\": \"<string>\",\n  \"engineTime\": \"<string>\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-d402e757-d0ce-41c2-a889-b98364422cc4"
+                },
+                {
+                  "id": "4de6daab-b967-4749-af0e-03f09c2ebcb7",
+                  "name": "Bad request. The request body or parameters are invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reloads/:reloadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reloads",
+                        ":reloadId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reloadId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-4de6daab-b967-4749-af0e-03f09c2ebcb7"
+                },
+                {
+                  "id": "c0a53e99-a72c-444a-86ee-4e75f6e8e3b2",
+                  "name": "Unauthorized. Authentication credentials are missing or invalid.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reloads/:reloadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reloads",
+                        ":reloadId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reloadId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-c0a53e99-a72c-444a-86ee-4e75f6e8e3b2"
+                },
+                {
+                  "id": "7b7b4ccf-9378-436d-a81b-f6f77096f4f5",
+                  "name": "Forbidden. The user does not have permission for this operation.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reloads/:reloadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reloads",
+                        ":reloadId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reloadId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-7b7b4ccf-9378-436d-a81b-f6f77096f4f5"
+                },
+                {
+                  "id": "677e7d2c-04e8-464e-99d1-8639e6639dd3",
+                  "name": "Not found. The requested resource does not exist.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reloads/:reloadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reloads",
+                        ":reloadId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reloadId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-677e7d2c-04e8-464e-99d1-8639e6639dd3"
+                },
+                {
+                  "id": "10c34486-f006-4213-ac5b-b8cdb9517e2d",
+                  "name": "Internal server error. An unexpected error occurred.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reloads/:reloadId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reloads",
+                        ":reloadId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "reloadId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T02:41:54.000Z",
+                  "updatedAt": "2026-07-28T02:41:54.000Z",
+                  "uid": "35240-10c34486-f006-4213-ac5b-b8cdb9517e2d"
+                }
+              ],
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-5164c18b-e8e1-4917-8e25-226b32c7d468"
+            }
+          ],
+          "id": "903c4035-4eb2-4b34-a8bb-2045a4530e5c",
+          "createdAt": "2026-07-28T02:41:54.000Z",
+          "updatedAt": "2026-07-28T02:41:54.000Z",
+          "uid": "35240-903c4035-4eb2-4b34-a8bb-2045a4530e5c"
+        },
+        {
+          "name": "List reloads",
+          "id": "f5628baf-39de-4bba-b8ac-8b4b29090efd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reloads?appId=<uuid>&filter=<string>&limit=10&log=false&next=<string>&prev=<string>&partial=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reloads"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The identifier of the app to list reloads for.",
+                  "key": "appId",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "SCIM filter expression for advanced filtering of reload records.",
+                  "key": "filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of reload records to return.",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "When true, includes the script log in the response.",
+                  "key": "log",
+                  "value": "false"
+                },
+                {
+                  "description": "Cursor for the next page of results.",
+                  "key": "next",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Cursor for the previous page of results.",
+                  "key": "prev",
+                  "value": "<string>"
+                },
+                {
+                  "description": "When true, returns partial reload information.",
+                  "key": "partial",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Finds and returns reload records for a specific app. The appId query parameter is required."
+          },
+          "response": [
+            {
+              "id": "0d76137b-aa03-4855-87c2-efa41fc9a011",
+              "name": "Reload records returned successfully.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reloads?appId=<uuid>&filter=<string>&limit=10&log=false&next=<string>&prev=<string>&partial=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The identifier of the app to list reloads for.",
+                      "key": "appId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "SCIM filter expression for advanced filtering of reload records.",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of reload records to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "When true, includes the script log in the response.",
+                      "key": "log",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Cursor for the next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for the previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When true, returns partial reload information.",
+                      "key": "partial",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"appId\": \"<string>\",\n      \"tenantId\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"type\": \"external\",\n      \"status\": \"RELOADING\",\n      \"partial\": \"<boolean>\",\n      \"log\": \"<string>\",\n      \"creationTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"duration\": \"<string>\",\n      \"engineTime\": \"<string>\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"<string>\"\n        }\n      }\n    },\n    {\n      \"id\": \"<string>\",\n      \"appId\": \"<string>\",\n      \"tenantId\": \"<string>\",\n      \"userId\": \"<string>\",\n      \"type\": \"hub\",\n      \"status\": \"FAILED\",\n      \"partial\": \"<boolean>\",\n      \"log\": \"<string>\",\n      \"creationTime\": \"<dateTime>\",\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\",\n      \"duration\": \"<string>\",\n      \"engineTime\": \"<string>\",\n      \"links\": {\n        \"self\": {\n          \"href\": \"<string>\"\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    },\n    \"next\": {\n      \"href\": \"<string>\"\n    },\n    \"prev\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-0d76137b-aa03-4855-87c2-efa41fc9a011"
+            },
+            {
+              "id": "59fd4fa8-4d5c-4aa2-8ef3-9d2928d1ce04",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reloads?appId=<uuid>&filter=<string>&limit=10&log=false&next=<string>&prev=<string>&partial=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The identifier of the app to list reloads for.",
+                      "key": "appId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "SCIM filter expression for advanced filtering of reload records.",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of reload records to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "When true, includes the script log in the response.",
+                      "key": "log",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Cursor for the next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for the previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When true, returns partial reload information.",
+                      "key": "partial",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-59fd4fa8-4d5c-4aa2-8ef3-9d2928d1ce04"
+            },
+            {
+              "id": "b2d1d6ea-a774-41fe-bc96-8b82e2ae4aad",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reloads?appId=<uuid>&filter=<string>&limit=10&log=false&next=<string>&prev=<string>&partial=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The identifier of the app to list reloads for.",
+                      "key": "appId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "SCIM filter expression for advanced filtering of reload records.",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of reload records to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "When true, includes the script log in the response.",
+                      "key": "log",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Cursor for the next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for the previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When true, returns partial reload information.",
+                      "key": "partial",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-b2d1d6ea-a774-41fe-bc96-8b82e2ae4aad"
+            },
+            {
+              "id": "a9941f9e-c246-4dfc-81d7-01a7649b2561",
+              "name": "Forbidden. The user does not have permission for this operation.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reloads?appId=<uuid>&filter=<string>&limit=10&log=false&next=<string>&prev=<string>&partial=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The identifier of the app to list reloads for.",
+                      "key": "appId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "SCIM filter expression for advanced filtering of reload records.",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of reload records to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "When true, includes the script log in the response.",
+                      "key": "log",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Cursor for the next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for the previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When true, returns partial reload information.",
+                      "key": "partial",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-a9941f9e-c246-4dfc-81d7-01a7649b2561"
+            },
+            {
+              "id": "df97a41a-d9e4-4d44-9a0b-d65c30e2f62c",
+              "name": "Internal server error. An unexpected error occurred.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reloads?appId=<uuid>&filter=<string>&limit=10&log=false&next=<string>&prev=<string>&partial=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The identifier of the app to list reloads for.",
+                      "key": "appId",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "SCIM filter expression for advanced filtering of reload records.",
+                      "key": "filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of reload records to return.",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "When true, includes the script log in the response.",
+                      "key": "log",
+                      "value": "false"
+                    },
+                    {
+                      "description": "Cursor for the next page of results.",
+                      "key": "next",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Cursor for the previous page of results.",
+                      "key": "prev",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "When true, returns partial reload information.",
+                      "key": "partial",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-df97a41a-d9e4-4d44-9a0b-d65c30e2f62c"
+            }
+          ],
+          "createdAt": "2026-07-28T02:41:54.000Z",
+          "updatedAt": "2026-07-28T02:41:54.000Z",
+          "uid": "35240-f5628baf-39de-4bba-b8ac-8b4b29090efd"
+        },
+        {
+          "name": "Reload an app",
+          "id": "b0e64dfa-6f67-412a-b858-ab6e87bdb979",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reloads",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reloads"
+              ]
+            },
+            "description": "Triggers a reload of an app to refresh its data from connected sources. Rate limited to 50 requests per minute."
+          },
+          "response": [
+            {
+              "id": "fd1ed666-4911-4772-980a-d2dc91c84df1",
+              "name": "Reload initiated successfully.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"appId\": \"<string>\",\n  \"tenantId\": \"<string>\",\n  \"userId\": \"<string>\",\n  \"type\": \"hub\",\n  \"status\": \"QUEUED\",\n  \"partial\": \"<boolean>\",\n  \"log\": \"<string>\",\n  \"creationTime\": \"<dateTime>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"duration\": \"<string>\",\n  \"engineTime\": \"<string>\",\n  \"links\": {\n    \"self\": {\n      \"href\": \"<string>\"\n    }\n  }\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-fd1ed666-4911-4772-980a-d2dc91c84df1"
+            },
+            {
+              "id": "c67ce31f-6eba-4dcf-a453-bd55dc392e70",
+              "name": "Bad request. The request body or parameters are invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-c67ce31f-6eba-4dcf-a453-bd55dc392e70"
+            },
+            {
+              "id": "053f6fbe-9208-427c-bc29-2267445c0e3f",
+              "name": "Unauthorized. Authentication credentials are missing or invalid.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-053f6fbe-9208-427c-bc29-2267445c0e3f"
+            },
+            {
+              "id": "2ede0deb-90b4-4637-b3e7-6954b2bc2360",
+              "name": "Forbidden. The user does not have permission for this operation.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-2ede0deb-90b4-4637-b3e7-6954b2bc2360"
+            },
+            {
+              "id": "1f7ed1c3-186c-4b69-8820-f41ad909dccb",
+              "name": "Too many requests. Rate limit exceeded.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-1f7ed1c3-186c-4b69-8820-f41ad909dccb"
+            },
+            {
+              "id": "49391291-2f00-4da8-8274-b3df975ca531",
+              "name": "Internal server error. An unexpected error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appId\": \"<string>\",\n  \"partial\": false,\n  \"variables\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reloads",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reloads"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"proident_c\": false\n      }\n    },\n    {\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"status\": \"<string>\",\n      \"meta\": {\n        \"sit_f\": 26389642.61514865,\n        \"sint_db8\": \"cillum labore Ut ea sunt\",\n        \"ex_51\": \"nostrud nisi ipsum cillum\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T02:41:54.000Z",
+              "updatedAt": "2026-07-28T02:41:54.000Z",
+              "uid": "35240-49391291-2f00-4da8-8274-b3df975ca531"
+            }
+          ],
+          "createdAt": "2026-07-28T02:41:54.000Z",
+          "updatedAt": "2026-07-28T02:41:54.000Z",
+          "uid": "35240-b0e64dfa-6f67-412a-b858-ab6e87bdb979"
+        }
+      ],
+      "id": "7a5dde47-dfe4-481f-a52b-f39a42e8e535",
+      "createdAt": "2026-07-28T02:41:54.000Z",
+      "updatedAt": "2026-07-28T02:41:54.000Z",
+      "uid": "35240-7a5dde47-dfe4-481f-a52b-f39a42e8e535"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant",
+      "value": "your-tenant"
+    },
+    {
+      "key": "region",
+      "value": "us"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{tenant}}.{{region}}.qlikcloud.com/api/v1"
+    }
+  ]
+}

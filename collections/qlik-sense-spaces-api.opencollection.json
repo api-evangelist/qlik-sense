@@ -1,0 +1,316 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Cloud REST Apps Spaces API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Spaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List spaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces",
+            "params": [
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "Filter by action the user has access to."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of spaces to return."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by space name."
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for next page of results."
+              },
+              {
+                "name": "ownerId",
+                "value": "",
+                "type": "query",
+                "description": "Filter by owner identifier."
+              },
+              {
+                "name": "prev",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for previous page of results."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field and order."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by space type."
+              }
+            ]
+          },
+          "docs": "Retrieves spaces that the current user has access to. Supports filtering by type, name, and owner."
+        },
+        {
+          "info": {
+            "name": "Create a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new shared, managed, or data space."
+        },
+        {
+          "info": {
+            "name": "Retrieve a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific space by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the properties of a specific space."
+        },
+        {
+          "info": {
+            "name": "Patch space properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates specific properties of a space using JSON Patch operations on /name, /ownerId, and /description."
+        },
+        {
+          "info": {
+            "name": "Delete a space",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ]
+          },
+          "docs": "Deletes a specific space by its identifier."
+        },
+        {
+          "info": {
+            "name": "List space assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ]
+          },
+          "docs": "Retrieves all user and group role assignments for a specific space."
+        },
+        {
+          "info": {
+            "name": "Assign user or group to space",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new role assignment for a user or group in a space."
+        },
+        {
+          "info": {
+            "name": "Retrieve a space assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments/:assignmentId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              },
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space assignment."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific assignment by its identifier."
+        },
+        {
+          "info": {
+            "name": "Update a space assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments/:assignmentId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              },
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space assignment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the role for an existing space assignment."
+        },
+        {
+          "info": {
+            "name": "Delete a space assignment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/:spaceId/assignments/:assignmentId",
+            "params": [
+              {
+                "name": "spaceId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space."
+              },
+              {
+                "name": "assignmentId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the space assignment."
+              }
+            ]
+          },
+          "docs": "Removes a user or group assignment from the space."
+        },
+        {
+          "info": {
+            "name": "List space types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/spaces/types"
+          },
+          "docs": "Retrieves the available space types for the tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

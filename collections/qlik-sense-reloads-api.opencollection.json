@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qlik Cloud REST Apps Reloads API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reloads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List reloads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads",
+            "params": [
+              {
+                "name": "appId",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of the app to list reloads for."
+              },
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "SCIM filter expression for advanced filtering of reload records."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of reload records to return."
+              },
+              {
+                "name": "log",
+                "value": "",
+                "type": "query",
+                "description": "When true, includes the script log in the response."
+              },
+              {
+                "name": "next",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for the next page of results."
+              },
+              {
+                "name": "prev",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for the previous page of results."
+              },
+              {
+                "name": "partial",
+                "value": "",
+                "type": "query",
+                "description": "When true, returns partial reload information."
+              }
+            ]
+          },
+          "docs": "Finds and returns reload records for a specific app. The appId query parameter is required."
+        },
+        {
+          "info": {
+            "name": "Reload an app",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a reload of an app to refresh its data from connected sources. Rate limited to 50 requests per minute."
+        },
+        {
+          "info": {
+            "name": "Retrieve a reload record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads/:reloadId",
+            "params": [
+              {
+                "name": "reloadId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reload."
+              }
+            ]
+          },
+          "docs": "Retrieves a specific reload record by its identifier."
+        },
+        {
+          "info": {
+            "name": "Cancel a reload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}.{region}.qlikcloud.com/api/v1/reloads/:reloadId/actions/cancel",
+            "params": [
+              {
+                "name": "reloadId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the reload."
+              }
+            ]
+          },
+          "docs": "Cancels a queued or in-progress reload. Rate limited to 50 requests per minute."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

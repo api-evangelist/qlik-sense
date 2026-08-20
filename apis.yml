@@ -105,6 +105,8 @@ apis:
     and retrieving app metadata.
   humanURL: https://qlik.dev/apis/json-rpc/qix
   tags:
+  - Application
+  tags_raw:
   - Apps
   properties:
   - type: OpenAPI

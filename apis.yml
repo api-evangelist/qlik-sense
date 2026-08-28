@@ -4,6 +4,18 @@ description: >-
   APIs for Qlik Sense, a business intelligence and data analytics platform providing engine, repository, cloud,
   embedding, and data integration capabilities.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -144,6 +156,9 @@ apis:
   - type: Authentication
     url: https://qlik.dev/authenticate
 common:
+  - type: CapabilityMap
+    url: capabilities/qlik-sense-capability-edges.yml
+    name: Qlik Sense Business Capability Map
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/qlik-sense/overview
   - type: AgenticAccess

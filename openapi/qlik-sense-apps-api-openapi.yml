@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Qlik Cloud REST Apps API
   description: REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.
@@ -547,25 +547,96 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    AppScript:
+    ErrorResponse:
       type: object
-      description: A script version for an app.
+      description: Standard error response.
       properties:
-        id:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The error code.
+              title:
+                type: string
+                description: A short summary of the error.
+              detail:
+                type: string
+                description: A detailed error message.
+              status:
+                type: string
+                description: The HTTP status code as a string.
+              meta:
+                type: object
+                description: Additional error metadata.
+                additionalProperties: true
+    AppPublish:
+      type: object
+      description: Payload to publish an app to a managed space.
+      required:
+      - spaceId
+      properties:
+        spaceId:
           type: string
-          description: The unique identifier of the script version.
-        script:
+          description: The identifier of the managed space to publish into.
+        data:
           type: string
-          description: The content of the load script.
-        createdDate:
+          description: If set to source, the published app includes the source app data.
+          enum:
+          - source
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              description: The name of the published app. Defaults to the source app name.
+            description:
+              type: string
+              description: The description of the published app.
+    AppCreate:
+      type: object
+      description: Payload to create a new app.
+      required:
+      - name
+      properties:
+        name:
           type: string
-          format: date-time
-          description: When the script version was created.
-        modifiedDate:
+          description: The name of the new app.
+          maxLength: 256
+        description:
           type: string
-          format: date-time
-          description: When the script version was last modified.
+          description: A description for the new app.
+        spaceId:
+          type: string
+          description: The identifier of the space to create the app in. Uses the personal space if omitted.
     ReloadLog:
       type: object
       description: Metadata about an app reload log.
@@ -631,6 +702,19 @@ components:
             peakMemoryBytes:
               type: integer
               description: Peak memory consumption during last reload.
+    AppCopy:
+      type: object
+      description: Payload to copy an app.
+      properties:
+        name:
+          type: string
+          description: The name for the copied app. If omitted, the original name is used with a copy suffix.
+        spaceId:
+          type: string
+          description: The identifier of the space for the copied app. If omitted, the copy is placed in the personal space.
+        description:
+          type: string
+          description: The description for the copied app.
     AppUpdate:
       type: object
       description: Payload to update an existing app.
@@ -642,47 +726,16 @@ components:
         description:
           type: string
           description: The updated description for the app.
-    ErrorResponse:
+    AppDataLineage:
       type: object
-      description: Standard error response.
+      description: Data lineage information for an app.
       properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                description: The error code.
-              title:
-                type: string
-                description: A short summary of the error.
-              detail:
-                type: string
-                description: A detailed error message.
-              status:
-                type: string
-                description: The HTTP status code as a string.
-              meta:
-                type: object
-                description: Additional error metadata.
-                additionalProperties: true
-    AppCreate:
-      type: object
-      description: Payload to create a new app.
-      required:
-      - name
-      properties:
-        name:
+        discriminator:
           type: string
-          description: The name of the new app.
-          maxLength: 256
-        description:
+          description: The type of lineage source.
+        statement:
           type: string
-          description: A description for the new app.
-        spaceId:
-          type: string
-          description: The identifier of the space to create the app in. Uses the personal space if omitted.
+          description: The load statement from the data connection.
     AppAttributes:
       type: object
       description: Represents a Qlik Sense analytics application.
@@ -775,77 +828,24 @@ components:
               properties:
                 href:
                   type: string
-    AppPublish:
+    AppScript:
       type: object
-      description: Payload to publish an app to a managed space.
-      required:
-      - spaceId
+      description: A script version for an app.
       properties:
-        spaceId:
+        id:
           type: string
-          description: The identifier of the managed space to publish into.
-        data:
+          description: The unique identifier of the script version.
+        script:
           type: string
-          description: If set to source, the published app includes the source app data.
-          enum:
-          - source
-        attributes:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The name of the published app. Defaults to the source app name.
-            description:
-              type: string
-              description: The description of the published app.
-    AppCopy:
-      type: object
-      description: Payload to copy an app.
-      properties:
-        name:
+          description: The content of the load script.
+        createdDate:
           type: string
-          description: The name for the copied app. If omitted, the original name is used with a copy suffix.
-        spaceId:
+          format: date-time
+          description: When the script version was created.
+        modifiedDate:
           type: string
-          description: The identifier of the space for the copied app. If omitted, the copy is placed in the personal space.
-        description:
-          type: string
-          description: The description for the copied app.
-    AppDataLineage:
-      type: object
-      description: Data lineage information for an app.
-      properties:
-        discriminator:
-          type: string
-          description: The type of lineage source.
-        statement:
-          type: string
-          description: The load statement from the data connection.
-  responses:
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized. Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden. The user does not have permission for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          format: date-time
+          description: When the script version was last modified.
   parameters:
     ReloadId:
       name: reloadId

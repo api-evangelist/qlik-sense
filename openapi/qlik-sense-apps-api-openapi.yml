@@ -547,57 +547,25 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized. Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden. The user does not have permission for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
+    AppScript:
       type: object
-      description: Standard error response.
+      description: A script version for an app.
       properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: string
-                description: The error code.
-              title:
-                type: string
-                description: A short summary of the error.
-              detail:
-                type: string
-                description: A detailed error message.
-              status:
-                type: string
-                description: The HTTP status code as a string.
-              meta:
-                type: object
-                description: Additional error metadata.
-                additionalProperties: true
+        id:
+          type: string
+          description: The unique identifier of the script version.
+        script:
+          type: string
+          description: The content of the load script.
+        createdDate:
+          type: string
+          format: date-time
+          description: When the script version was created.
+        modifiedDate:
+          type: string
+          format: date-time
+          description: When the script version was last modified.
     AppPublish:
       type: object
       description: Payload to publish an app to a managed space.
@@ -637,23 +605,6 @@ components:
         spaceId:
           type: string
           description: The identifier of the space to create the app in. Uses the personal space if omitted.
-    ReloadLog:
-      type: object
-      description: Metadata about an app reload log.
-      properties:
-        id:
-          type: string
-          description: The reload identifier.
-        createdDate:
-          type: string
-          format: date-time
-          description: When the reload was executed.
-        success:
-          type: boolean
-          description: Whether the reload was successful.
-        duration:
-          type: integer
-          description: Duration of the reload in milliseconds.
     AppDataMetadata:
       type: object
       description: Data model and reload statistics metadata for an app.
@@ -715,6 +666,58 @@ components:
         description:
           type: string
           description: The description for the copied app.
+    ErrorResponse:
+      type: object
+      description: Standard error response.
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                description: The error code.
+              title:
+                type: string
+                description: A short summary of the error.
+              detail:
+                type: string
+                description: A detailed error message.
+              status:
+                type: string
+                description: The HTTP status code as a string.
+              meta:
+                type: object
+                description: Additional error metadata.
+                additionalProperties: true
+    AppDataLineage:
+      type: object
+      description: Data lineage information for an app.
+      properties:
+        discriminator:
+          type: string
+          description: The type of lineage source.
+        statement:
+          type: string
+          description: The load statement from the data connection.
+    ReloadLog:
+      type: object
+      description: Metadata about an app reload log.
+      properties:
+        id:
+          type: string
+          description: The reload identifier.
+        createdDate:
+          type: string
+          format: date-time
+          description: When the reload was executed.
+        success:
+          type: boolean
+          description: Whether the reload was successful.
+        duration:
+          type: integer
+          description: Duration of the reload in milliseconds.
     AppUpdate:
       type: object
       description: Payload to update an existing app.
@@ -726,16 +729,6 @@ components:
         description:
           type: string
           description: The updated description for the app.
-    AppDataLineage:
-      type: object
-      description: Data lineage information for an app.
-      properties:
-        discriminator:
-          type: string
-          description: The type of lineage source.
-        statement:
-          type: string
-          description: The load statement from the data connection.
     AppAttributes:
       type: object
       description: Represents a Qlik Sense analytics application.
@@ -828,24 +821,31 @@ components:
               properties:
                 href:
                   type: string
-    AppScript:
-      type: object
-      description: A script version for an app.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the script version.
-        script:
-          type: string
-          description: The content of the load script.
-        createdDate:
-          type: string
-          format: date-time
-          description: When the script version was created.
-        modifiedDate:
-          type: string
-          format: date-time
-          description: When the script version was last modified.
+  responses:
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     ReloadId:
       name: reloadId

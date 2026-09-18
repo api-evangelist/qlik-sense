@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Qlik Cloud REST Apps Spaces API
+  title: Qlik Cloud REST Spaces API
   description: REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.
   version: 1.0.0
   contact:
@@ -393,51 +393,27 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized. Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error. An unexpected error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden. The user does not have permission for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    SpaceUpdate:
+    SpaceCreate:
       type: object
-      description: Payload to update an existing space.
+      description: Payload to create a new space.
+      required:
+      - name
+      - type
       properties:
         name:
           type: string
-          description: The updated name for the space.
-        ownerId:
+          description: The name of the space.
+        type:
           type: string
-          description: The identifier of the new owner.
+          description: The type of space to create.
+          enum:
+          - shared
+          - managed
+          - data
         description:
           type: string
-          description: The updated description.
+          description: The description of the space.
     ErrorResponse:
       type: object
       description: Standard error response.
@@ -463,6 +439,64 @@ components:
                 type: object
                 description: Additional error metadata.
                 additionalProperties: true
+    JsonPatch:
+      type: object
+      description: A JSON Patch operation per RFC 6902.
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The patch operation.
+          enum:
+          - add
+          - remove
+          - replace
+        path:
+          type: string
+          description: The JSON pointer to the target field.
+        value:
+          description: The value for the operation.
+    SpaceUpdate:
+      type: object
+      description: Payload to update an existing space.
+      properties:
+        name:
+          type: string
+          description: The updated name for the space.
+        ownerId:
+          type: string
+          description: The identifier of the new owner.
+        description:
+          type: string
+          description: The updated description.
+    SpaceList:
+      type: object
+      description: Paginated list of spaces.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Space'
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+            prev:
+              type: object
+              properties:
+                href:
+                  type: string
     Space:
       type: object
       description: Represents a space in Qlik Cloud.
@@ -532,40 +566,6 @@ components:
               properties:
                 href:
                   type: string
-    SpaceAssignmentList:
-      type: object
-      description: List of space assignments.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/SpaceAssignment'
-    SpaceList:
-      type: object
-      description: Paginated list of spaces.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Space'
-        links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-            next:
-              type: object
-              properties:
-                href:
-                  type: string
-            prev:
-              type: object
-              properties:
-                href:
-                  type: string
     SpaceAssignmentCreate:
       type: object
       description: Payload to create a space role assignment.
@@ -598,45 +598,6 @@ components:
             - publisher
             - basicconsumer
           description: The roles to assign.
-    JsonPatch:
-      type: object
-      description: A JSON Patch operation per RFC 6902.
-      required:
-      - op
-      - path
-      properties:
-        op:
-          type: string
-          description: The patch operation.
-          enum:
-          - add
-          - remove
-          - replace
-        path:
-          type: string
-          description: The JSON pointer to the target field.
-        value:
-          description: The value for the operation.
-    SpaceCreate:
-      type: object
-      description: Payload to create a new space.
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: The name of the space.
-        type:
-          type: string
-          description: The type of space to create.
-          enum:
-          - shared
-          - managed
-          - data
-        description:
-          type: string
-          description: The description of the space.
     SpaceAssignment:
       type: object
       description: A role assignment for a user or group within a space.
@@ -675,6 +636,14 @@ components:
           type: string
           format: date-time
           description: When the assignment was last updated.
+    SpaceAssignmentList:
+      type: object
+      description: List of space assignments.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/SpaceAssignment'
   parameters:
     SpaceId:
       name: spaceId
@@ -690,6 +659,37 @@ components:
       description: The unique identifier of the space assignment.
       schema:
         type: string
+  responses:
+    InternalServerError:
+      description: Internal server error. An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     bearerAuth:
       type: http

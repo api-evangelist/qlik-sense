@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Qlik Cloud REST Apps Reloads API
+  title: Qlik Cloud REST Reloads API
   description: REST API for Qlik Cloud platform services including apps, spaces, and reloads. Provides programmatic access to manage analytics applications, organize resources into spaces with access control, and trigger data reloads. Authentication is performed via OAuth 2.0 bearer tokens or API keys issued from a Qlik Cloud tenant.
   version: 1.0.0
   contact:
@@ -190,63 +190,61 @@ paths:
         '500':
           $ref: '#/components/responses/InternalServerError'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized. Authentication credentials are missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalServerError:
-      description: Internal server error. An unexpected error occurred.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Forbidden:
-      description: Forbidden. The user does not have permission for this operation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Not found. The requested resource does not exist.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request. The request body or parameters are invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ErrorResponse:
+    ReloadCreate:
       type: object
-      description: Standard error response.
+      description: Payload to trigger an app reload.
+      required:
+      - appId
       properties:
-        errors:
+        appId:
+          type: string
+          description: The identifier of the app to reload.
+        partial:
+          type: boolean
+          description: When true, performs a partial reload which adds data to the existing data model without removing previous data.
+          default: false
+        variables:
           type: array
+          description: Variables to pass into the reload script. Maximum of 20 variables, each with a maximum name and value length of 256 characters.
+          maxItems: 20
           items:
             type: object
             properties:
-              code:
+              name:
                 type: string
-                description: The error code.
-              title:
+                description: The variable name.
+                maxLength: 256
+              value:
                 type: string
-                description: A short summary of the error.
-              detail:
-                type: string
-                description: A detailed error message.
-              status:
-                type: string
-                description: The HTTP status code as a string.
-              meta:
-                type: object
-                description: Additional error metadata.
-                additionalProperties: true
+                description: The variable value.
+                maxLength: 256
+    ReloadList:
+      type: object
+      description: Paginated list of reloads.
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reload'
+        links:
+          type: object
+          properties:
+            self:
+              type: object
+              properties:
+                href:
+                  type: string
+            next:
+              type: object
+              properties:
+                href:
+                  type: string
+            prev:
+              type: object
+              properties:
+                href:
+                  type: string
     Reload:
       type: object
       description: Represents a reload record in Qlik Cloud.
@@ -314,60 +312,62 @@ components:
               properties:
                 href:
                   type: string
-    ReloadCreate:
+    ErrorResponse:
       type: object
-      description: Payload to trigger an app reload.
-      required:
-      - appId
+      description: Standard error response.
       properties:
-        appId:
-          type: string
-          description: The identifier of the app to reload.
-        partial:
-          type: boolean
-          description: When true, performs a partial reload which adds data to the existing data model without removing previous data.
-          default: false
-        variables:
+        errors:
           type: array
-          description: Variables to pass into the reload script. Maximum of 20 variables, each with a maximum name and value length of 256 characters.
-          maxItems: 20
           items:
             type: object
             properties:
-              name:
+              code:
                 type: string
-                description: The variable name.
-                maxLength: 256
-              value:
+                description: The error code.
+              title:
                 type: string
-                description: The variable value.
-                maxLength: 256
-    ReloadList:
-      type: object
-      description: Paginated list of reloads.
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reload'
-        links:
-          type: object
-          properties:
-            self:
-              type: object
-              properties:
-                href:
-                  type: string
-            next:
-              type: object
-              properties:
-                href:
-                  type: string
-            prev:
-              type: object
-              properties:
-                href:
-                  type: string
+                description: A short summary of the error.
+              detail:
+                type: string
+                description: A detailed error message.
+              status:
+                type: string
+                description: The HTTP status code as a string.
+              meta:
+                type: object
+                description: Additional error metadata.
+                additionalProperties: true
+  responses:
+    InternalServerError:
+      description: Internal server error. An unexpected error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized. Authentication credentials are missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Not found. The requested resource does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: Forbidden. The user does not have permission for this operation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request. The request body or parameters are invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     ReloadId:
       name: reloadId

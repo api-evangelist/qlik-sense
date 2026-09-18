@@ -102,6 +102,11 @@ apis:
     JavaScript API for embedding Qlik Sense visualizations and mashups into web applications.
   humanURL: https://qlik.dev/embed
   tags:
+  - Embeddings
+  - JavaScript
+  - Visualization
+  - Mashups
+  tags_raw:
   - Embedding
   - JavaScript
   - Visualization
@@ -148,6 +153,8 @@ apis:
     through role-based assignments.
   humanURL: https://qlik.dev/apis/json-rpc/qix
   tags:
+  - Space
+  tags_raw:
   - Spaces
   properties:
   - type: OpenAPI
